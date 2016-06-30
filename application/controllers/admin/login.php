@@ -30,7 +30,7 @@ class login extends CI_Controller {
             'view' => 'administrador'
             );
         
-        $this->load->view('logar/administrador');
+        $this->load->view('admin/logar/administrador');
     }
 
     //Responsável por fazer o login na parte administrativa
