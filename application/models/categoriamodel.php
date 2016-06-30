@@ -6,7 +6,7 @@ class CategoriaModel extends CI_Model{
 
 		if($dados != null){
 
-			$this->db->insert('TbCategoria', $dados);
+			$this->db->insert('tb_categoria', $dados);
 
 			$this->session->set_flashdata('cadastrook','Operação realizada com sucesso.');
 			
@@ -20,9 +20,9 @@ class CategoriaModel extends CI_Model{
 	
 	public function getAllCategoria(){
 
-		$this->db->from('TbCategoria');
+		$this->db->from('tb_categoria');
 
-		$this->db->order_by('categoria');
+		$this->db->order_by('nome');
 
 		return $this->db->get();
 	}
@@ -30,7 +30,7 @@ class CategoriaModel extends CI_Model{
 	public function DropDownCategoria(){
 		
 		
-		$this->db->from('TbCategoria');
+		$this->db->from('tb_categoria');
 		
 		$result = $this->db->get();
 		
@@ -59,7 +59,7 @@ class CategoriaModel extends CI_Model{
 	   
 	   	public function getAllCategoriaView(){
 
-		$this->db->from('TbCategoria');
+		$this->db->from('tb_categoria');
 
 		return $this->db->get();
 	}
@@ -72,7 +72,7 @@ class CategoriaModel extends CI_Model{
 
 			$this->db->limit(1);
 
-			return $this->db->get('TbCategoria');
+			return $this->db->get('tb_categoria');
 		}
 	}
 
@@ -84,7 +84,7 @@ class CategoriaModel extends CI_Model{
 
 			$this->db->limit(1);
 
-			return $this->db->get('TbCategoria');
+			return $this->db->get('tb_categoria');
 		}
 	}
 
@@ -93,7 +93,7 @@ class CategoriaModel extends CI_Model{
 
 		if($dados != null && $condition != null){
 
-			$this->db->update('TbCategoria', $dados, $condition);
+			$this->db->update('tb_categoria', $dados, $condition);
 
 			$this->session->set_flashdata('edicaook', 'Alteração realizada com sucesso.');
 

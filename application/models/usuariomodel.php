@@ -6,7 +6,7 @@ class UsuarioModel extends CI_Model{
 
 		if($dados != null){
 
-			$this->db->insert('TbLogin', $dados);
+			$this->db->insert('tb_usuario', $dados);
 
 			$this->session->set_flashdata('cadastrook','Operação realizada com sucesso.');
 			
@@ -18,11 +18,11 @@ class UsuarioModel extends CI_Model{
 
 		if($id != null){
 			
-			$this->db->where('idLogin', $id);
+			$this->db->where('id_usuario', $id);
 
 			$this->db->limit(1);
 
-			return $this->db->get('TbLogin');
+			return $this->db->get('tb_usuario');
 		}
 	}
 	
@@ -41,9 +41,9 @@ class UsuarioModel extends CI_Model{
 
 	public function getAllUsuario(){
 
-		$this->db->from('TbLogin');
+		$this->db->from('tb_usuario');
 
-		$this->db->order_by('idLogin');
+		$this->db->order_by('id_usuario');
 
 
 		return $this->db->get();
@@ -56,12 +56,12 @@ class UsuarioModel extends CI_Model{
 		if($dados != null){
 
 			//Monta a consulta com a seguintes condições
-			$this->db->where('login', $dados['login']);
+			$this->db->where('email', $dados['login']);
 			//$this->db->where('senha', sha1($dados['senha']));
 			$this->db->where('senha', $dados['senha']);
 
 			//Armazena os registro na variavel query
-			$query = $this->db->get('TbLogin');
+			$query = $this->db->get('tb_usuario');
 
 			//Verifica se foi encontrado um registro com os dados igual a das condições
 			if($query->num_rows){	
@@ -81,7 +81,7 @@ class UsuarioModel extends CI_Model{
 			$this->db->where('senha', md5($dados['senha']) );
 
 			//Armazena os registro na variavel query
-			$query = $this->db->get('TbLogin');
+			$query = $this->db->get('tb_usuario');
 
 			//Verifica se foi encontrado um registro com os dados igual a das condições
 			if($query->num_rows){	
@@ -98,12 +98,12 @@ class UsuarioModel extends CI_Model{
 		if($dados != null){
 
 			//Monta a consulta com a seguintes condições
-			$this->db->where('login', $dados['login']);
+			$this->db->where('email', $dados['login']);
 			//$this->db->where('senha', sha1($dados['senha']));
 			$this->db->where('senha', $dados['senha']);
 
 			//Armazena os registro na variavel query
-			$query = $this->db->get('TbLogin');
+			$query = $this->db->get('tb_usuario');
 
 			//Verifica se foi encontrado um registro com os dados igual a das condições
 			if($query->num_rows == 1){
@@ -123,7 +123,7 @@ class UsuarioModel extends CI_Model{
 			$this->db->where('senha', md5($dados['senha'] ) );
 
 			//Armazena os registro na variavel query
-			$query = $this->db->get('TbLogin');
+			$query = $this->db->get('tb_usuario');
 
 			//Verifica se foi encontrado um registro com os dados igual a das condições
 			if($query->num_rows == 1){				
