@@ -6,7 +6,7 @@ class Principal extends CI_Controller {
 	public function index()
 	{
 		$dados = array(
-		'pasta' => 'admin',
+		'pasta' => 'inicio',
 		'view' => 'inicio'
 		);
 		
