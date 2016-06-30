@@ -16,7 +16,7 @@
                 <div class="row">
                     <button title="Cadastrar categoria"  type="submit" class="btn waves-effect waves-light">Cadastrar</button>
                     <!-- <button  type="submit" class="btn btn-lg btn-primary" >Alterar</button> -->
-                    <button title="Limpar campos" id="btn-limpar" type="reset" class="btn waves-effect waves-light">Limpar</button><br<br>
+                    <button title="Limpar campos" id="btn-limpar" type="reset" class="btn waves-effect waves-light">Limpar</button><br/>
                 </div>
 
 
