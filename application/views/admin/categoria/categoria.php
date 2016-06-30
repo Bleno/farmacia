@@ -39,7 +39,7 @@
                     }, 4000);
                 </script>
                 <div id="edicaook">
-                    <font color="#FC5555"><?php echo $this->session->flashdata('edicaook'); ?></font>
+                    <font color="#009688"><?php echo $this->session->flashdata('edicaook'); ?></font>
                 </div>
             <?php endif; ?>
 
@@ -69,9 +69,9 @@
                         <td><?php echo $row->idCategoria;?></td>
                         <td><?php echo $row->categoria;?></td>
                         <td>
-                            <a title="Editar essa categoria" class="btn-floating btn-large green" href="<?php echo base_url('admin/categoria/editar/'); echo "/". $row->idCategoria;?>"><i class="large material-icons">mode_edit</i></a>
+                            <a title="Editar essa categoria" class="btn-floating btn-large waves-effect waves-light" href="<?php echo base_url('admin/categoria/editar/'); echo "/". $row->idCategoria;?>"><i class="large material-icons">mode_edit</i></a>
                             &nbsp;&nbsp;
-                            <a title="Enviar para lixeira" class="btn-floating btn-large red" href="#"><i class="large material-icons">delete</i></a>
+                            <a title="Enviar para lixeira" class="btn-floating btn-large waves-effect waves-light red" href="#"><i class="large material-icons">delete</i></a>
                         </td>
                     </tr>
                 <?php 
