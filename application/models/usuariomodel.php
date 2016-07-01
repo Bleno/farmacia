@@ -31,7 +31,7 @@ class UsuarioModel extends CI_Model{
 
 		if($dados != null && $condition != null){
 
-			$this->db->update('tblogin', $dados, $condition);
+			$this->db->update('tb_usuario', $dados, $condition);
 
 			$this->session->set_flashdata('edicaook', 'Cadastro alterado com sucesso.');
 

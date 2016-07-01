@@ -30,7 +30,7 @@ class usuario extends CI_Controller {
 		$dados = array(
 		'pasta' =>'usuario',
 		'view'  =>'cadastrar',
-		'login' => $this->UsuarioModel->getAllUsuario()->result(),
+		'usuario' => $this->UsuarioModel->getAllUsuario()->result(),
 		);
 	
 		$this->load->view('admin', $dados);
@@ -39,63 +39,67 @@ class usuario extends CI_Controller {
 
 	public function cadastrar(){
 
-		$login = elements(array('login'), $this->input->post());
-		$email = elements(array('senha'), $this->input->post());
+		//$login = elements(array('email'), $this->input->post());
+		//$email = elements(array('senha'), $this->input->post());
 		
-		$this->form_validation->set_rules('login', 'Email', 'trim|required|max_length[45]|strtolower|is_unique[TbLogin.login]');
-		$this->form_validation->set_message('is_unique', "O login ". $login['login'] ." já existe.");
+		$this->form_validation->set_rules('nome', 'nome', 'trim|required|max_length[45]|ucwords');
+		$this->form_validation->set_rules('email', 'email', 'trim|required|max_length[45]|strtolower|is_unique[tb_usuario.email]');
+		$this->form_validation->set_rules('senha', 'senha', 'trim|required|max_length[45]|matches[conf_senha]');
+		$this->form_validation->set_rules('conf_senha', 'conf_senha', 'trim|required|max_length[45]');
+		$this->form_validation->set_message('is_unique', "O Email ". $this->input->post('email') ." já existe!");
+		$this->form_validation->set_message('matches', "As senhas precisam ser iguais!");
 
 
 		if($this->form_validation->run()){
 
-			$dados = elements(array('login', 'senha', 'nivelAcesso','dataCadastro','flagAtivo'), $this->input->post());
+			$dados = elements(array('nome', 'email', 'senha'), $this->input->post());
 			$dados['senha'] = md5($dados['senha']);
-			$dados['nivelAcesso']= 2;
-			$dados['dataCadastro']= date('Y-m-d');
-
-			$dados['flagAtivo'] = 1;
+			$dados['dt_cadastro'] = date("Y-m-d H:i:s");
+			$dados['dt_update'] = date("Y-m-d H:i:s");
 
 		    $this->UsuarioModel->insertUsuario($dados);
 		}else{
 			$this->session->set_flashdata('erro', 'Campo(s) obrigatório(s) não preenchido(s)');
 		}
 
-          	$dados = array(
+        $dados = array(
 			'pasta' => 'usuario',
 			'view' => 'cadastrar',
-			'login' => $this->UsuarioModel->getAllUsuario()->result(),
+			'usuario' => $this->UsuarioModel->getAllUsuario()->result(),
 			
-		);
-		$this->load->view('Admin', $dados);
+			);
+		$this->load->view('admin', $dados);
 
 
 	}
 
-		public function editar(){
+	public function editar(){
 
-					$this->form_validation->set_rules('login', 'Login', 'trim|required|max_length[45]|strtolower|ucwords');
-					$this->form_validation->set_rules('idLogin', 'idLogin', 'required');
+		$this->form_validation->set_rules('nome', 'nome', 'trim|required|max_length[45]|ucwords');
+		$this->form_validation->set_rules('senha', 'senha', 'trim|required|max_length[45]|matches[conf_senha]');
+		$this->form_validation->set_rules('conf_senha', 'conf_senha', 'trim|required|max_length[45]');
+		$this->form_validation->set_message('matches', "As senhas precisam ser iguais!");
 			
-					if($this->form_validation->run()){
+		if($this->form_validation->run()){
 
-						$dados = elements(array('login','senha','flagAtivo'), $this->input->post());
-						$dados['senha']= md5($dados['senha']);
+			$update = elements(array('nome','senha'), $this->input->post());
+			$update['senha']= md5($update['senha']);
+			$update['dt_update'] = date("Y-m-d H:i:s");
 						
-						$this->UsuarioModel->updateUsuario($dados, array('idLogin' => $this->input->post('idLogin')));
+			$this->UsuarioModel->updateUsuario($update, array('id_usuario' => $this->input->post('id_usuario')));
 					
-					}else{
-						$this->session->set_flashdata('erro', 'Login já existe!');
-					}
+		}else{
+			$this->session->set_flashdata('erro', 'Login já existe!EDIT');
+		}
 			
-					$dados = array(
-						'pasta' => 'usuario',
-						'view' => 'editar',
-						'login' => $this->UsuarioModel->getAllUsuario()->result(),
-						'loginho' => $this->UsuarioModel->getAllUsuario()->result()
-						 );
-					$this->load->view('admin', $dados);
+		$dados = array(
+					'pasta' => 'usuario',
+					'view' => 'editar',
+					'usuarios' => $this->UsuarioModel->getAllUsuario()->result(),
+					);
+		$this->load->view('admin', $dados);
 			
-				}
+	}
 }
 
 /* End of file welcome.php */
