@@ -66,10 +66,10 @@
                     foreach($Categorias as $row):
                 ?>
                     <tr>
-                        <td><?php echo $row->idCategoria;?></td>
-                        <td><?php echo $row->categoria;?></td>
+                        <td><?php echo $row->idtb_categoria;?></td>
+                        <td><?php echo $row->nome;?></td>
                         <td>
-                            <a title="Editar essa categoria" class="btn-floating btn-large waves-effect waves-light" href="<?php echo base_url('admin/categoria/editar/'); echo "/". $row->idCategoria;?>"><i class="large material-icons">mode_edit</i></a>
+                            <a title="Editar essa categoria" class="btn-floating btn-large waves-effect waves-light" href="<?php echo base_url('admin/categoria/editar/'); echo "/". $row->slug;?>"><i class="large material-icons">mode_edit</i></a>
                             &nbsp;&nbsp;
                             <a title="Enviar para lixeira" class="btn-floating btn-large waves-effect waves-light red" href="#"><i class="large material-icons">delete</i></a>
                         </td>

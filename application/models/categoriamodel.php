@@ -42,29 +42,28 @@ class CategoriaModel extends CI_Model{
 	   //Varivavel $return com o primeiro indice 0 com o valor 'Selecione'
 	   //$return[''] = 'Selecione';
 	
-	   //Percore os valores 
-	   foreach($result->result_array() as $row){
-	    //O indice que será o id receberá o valor
-	    $return[$row['idCategoria']] = $row['categoria'];
-	   }
-  }
+		   //Percore os valores 
+		   foreach($result->result_array() as $row){
+		    //O indice que será o id receberá o valor
+		    $return[$row['idCategoria']] = $row['categoria'];
+		   }
+  		}
 
-  return $return;
-	
+  		return $return;
 	
 	}
 	   
 	   //objeto impressão categoria de fotos
 	   //Descrição e preço dos produtos.
 	   
-	   	public function getAllCategoriaView(){
+	public function getAllCategoriaView(){
 
 		$this->db->from('tb_categoria');
 
 		return $this->db->get();
 	}
 	
-		public function getByIdCategoria($id = null){
+	public function getByIdCategoria($id = null){
 
 		if($id != null){
 			
@@ -76,7 +75,7 @@ class CategoriaModel extends CI_Model{
 		}
 	}
 
-		public function getById($id = null){
+	public function getById($id = null){
 
 		if($id != null){
 			
@@ -88,8 +87,20 @@ class CategoriaModel extends CI_Model{
 		}
 	}
 
+	public function getBySlug($slug = null){
 
-		public function updateCategoria($dados = null, $condition = null){
+		if($slug != null){
+			
+			$this->db->where('slug', $slug);
+
+			$this->db->limit(1);
+
+			return $this->db->get('tb_categoria');
+		}
+	}
+
+
+	public function updateCategoria($dados = null, $condition = null){
 
 		if($dados != null && $condition != null){
 

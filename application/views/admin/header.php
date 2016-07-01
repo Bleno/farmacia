@@ -29,8 +29,10 @@
                 <li><a href="#">Produto</a></li>
                 <li><a href="<?php echo base_url("admin/categoria"); ?>">Categoria</a></li>
                 <li><a href="#">Usuários</a></li>
+                <li><a href="#"><?php echo $this->session->userdata('nome'); ?></a></li>
             </ul>
             <ul id="nav-mobile" class="side-nav">
+                <li><a href="#"><?php echo $this->session->userdata('nome'); ?></a></li>
                 <li><a href="#">Produto</a></li>
                 <li><a href="<?php echo base_url("admin/categoria"); ?>">Categoria</a></li>
                 <li><a href="#">Usuários</a></li>

@@ -1,11 +1,11 @@
 <?php 
 
 //Pega o seguimento 4 da url
-$idCategoria = $this->uri->segment(4);
+$slug = $this->uri->segment(4);
 
-if($idCategoria == null) redirect('admin/categoria');
+if($slug == null) redirect('admin/categoria');
 
-$categoria = $this->CategoriaModel->getById($idCategoria)->row();
+$categoria = $this->CategoriaModel->getBySlug($slug)->row();
 
 if($this->session->flashdata('edicaook')):
 ?>
@@ -33,7 +33,8 @@ if($this->session->flashdata('edicaook')):
             <form class="col s12" method="post" action="<?php echo base_url("admin/categoria/editar")?>">
                 <div class="row">
                     <div class="input-field col s6">
-                      <input value="<?php echo $categoria->categoria; ?>" type="text" id="categoria" name="categoria" value= "" class="validate" placeholder="Digite a Categoria" required autofocus>
+                      <input value="<?php echo $categoria->nome; ?>" type="text" id="categoria" name="categoria" class="validate" placeholder="Digite a Categoria" required autofocus>
+                      <input value="<?php echo $categoria->slug; ?>" type="hidden" name="slug">
                       <label for="categoria">Categoria</label>
                     </div>
                 </div>
@@ -90,10 +91,10 @@ if($this->session->flashdata('edicaook')):
                     foreach($Categorias as $row):
                 ?>
                     <tr>
-                        <td><?php echo $row->idCategoria;?></td>
-                        <td><?php echo $row->categoria;?></td>
+                        <td><?php echo $row->idtb_categoria;?></td>
+                        <td><?php echo $row->nome;?></td>
                         <td>
-                            <a title="Editar essa categoria" class="btn-floating btn-large waves-effect waves-light" href="<?php echo base_url('admin/categoria/editar/'); echo "/". $row->idCategoria;?>"><i class="large material-icons">mode_edit</i></a>
+                            <a title="Editar essa categoria" class="btn-floating btn-large waves-effect waves-light" href="<?php echo base_url('admin/categoria/editar/'); echo "/". $row->slug;?>"><i class="large material-icons">mode_edit</i></a>
                             &nbsp;&nbsp;
                             <a title="Enviar para lixeira" class="btn-floating btn-large waves-effect waves-light red" href="#"><i class="large material-icons">delete</i></a>
                         </td>
