@@ -20,15 +20,18 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                      <input type="text" id="nome" name="nome" value="<?php echo set_value('nome'); ?>" class="validate" placeholder="Digite o Produto" required autofocus>
+                      <input type="text" id="nome" name="nome" value="<?php echo set_value('nome'); ?>" class="validate" placeholder="Digite o Produto" required autofocus/>
                       <label for="nome">Produto</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <textarea id="descricao" name="descricao" class="validate materialize-textarea" placeholder="Digite a descrição" title="Digite a descrição" required></textarea>
-                        <label for="descricao">Descrição</label>
+                        <input type="hidden" id="descricao" name="descricao" class="validate materialize-textarea" placeholder="Digite a descrição" title="Digite a descrição" required/>
+                        <h6 class="header green-text">Descrição</h6>
                     </div>
+                </div>
+                <div class="row">
+                    <div id="editor" class="input-field col s6"></div>
                 </div>
                 <div class="row">
                     <div class="file-field input-field col s6">
@@ -112,27 +115,27 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function() {
-        $('.dataTables').DataTable({
-                "responsive": true,
-                "oLanguage": {
-                        "oPaginate": { "sFirst": "<<", "sLast": ">>", "sNext": ">", "sPrevious": "<" },
-                        "sEmptyTable": 'Não foram encontrados registros. Tabela Vazia!',
-                        "sInfo": "<span>Exibindo de <b>_START_</b> até <b>_END_</b> de <b>_TOTAL_</b> registros encontrados.</span>",
-                        "sInfoEmpty": " ",
-                        "sInfoFiltered": "",
-                        "sInfoThousands": ".",
-                        "sLengthMenu": "Exibir _MENU_ registros",
-                        "sLoadingRecords": "<center>Carregando...</center>",
-                        "sProcessing": '<b>Processando...</b>', //"Processando...",
-                        "sSearch": "Pesquisa:",
-                        "sZeroRecords": "<center>Não foram encontrados registros.</center>"
-                },
-                "sPaginationType": "full_numbers",
-                "bFilter": true,
-                "bProcessing": true,
-                "bServerSide": false
-        });
-    });
+    // $(document).ready(function() {
+    //     $('.dataTables').DataTable({
+    //             "responsive": true,
+    //             "oLanguage": {
+    //                     "oPaginate": { "sFirst": "<<", "sLast": ">>", "sNext": ">", "sPrevious": "<" },
+    //                     "sEmptyTable": 'Não foram encontrados registros. Tabela Vazia!',
+    //                     "sInfo": "<span>Exibindo de <b>_START_</b> até <b>_END_</b> de <b>_TOTAL_</b> registros encontrados.</span>",
+    //                     "sInfoEmpty": " ",
+    //                     "sInfoFiltered": "",
+    //                     "sInfoThousands": ".",
+    //                     "sLengthMenu": "Exibir _MENU_ registros",
+    //                     "sLoadingRecords": "<center>Carregando...</center>",
+    //                     "sProcessing": '<b>Processando...</b>', //"Processando...",
+    //                     "sSearch": "Pesquisa:",
+    //                     "sZeroRecords": "<center>Não foram encontrados registros.</center>"
+    //             },
+    //             "sPaginationType": "full_numbers",
+    //             "bFilter": true,
+    //             "bProcessing": true,
+    //             "bServerSide": false
+    //     });
+    // });
 
 </script>
