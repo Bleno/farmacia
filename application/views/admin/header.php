@@ -26,14 +26,14 @@
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Painel Administrativo</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Produto</a></li>
+                <li><a href="<?php echo base_url("admin/produto"); ?>">Produto</a></li>
                 <li><a href="<?php echo base_url("admin/categoria"); ?>">Categoria</a></li>
                 <li><a href="<?php echo base_url("admin/usuario"); ?>">Usuários</a></li>
                 <li><a href="#"><?php echo $this->session->userdata('nome'); ?></a></li>
             </ul>
             <ul id="nav-mobile" class="side-nav">
                 <li><a href="#"><?php echo $this->session->userdata('nome'); ?></a></li>
-                <li><a href="#">Produto</a></li>
+                <li><a href="<?php echo base_url("admin/produto"); ?>">Produto</a></li>
                 <li><a href="<?php echo base_url("admin/categoria"); ?>">Categoria</a></li>
                 <li><a href="<?php echo base_url("admin/usuario"); ?>">Usuários</a></li>
             </ul>

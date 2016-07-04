@@ -1,38 +1,48 @@
     <div class="container">
         <div class="section">
-            <h5 class="header green-text">Gerenciar Usuário</h3>
+            <h5 class="header green-text">Gerenciar Produto</h3>
         </div>
         <div class="section">
             <div class="divider"></div>
         </div>
         <div class="section">
-            <form class="col s12" method="post" action="<?php echo base_url("admin/usuario/cadastrar")?>">
+            <form class="col s12" method="post" action="<?php echo base_url("admin/produto/cadastrar")?>" enctype="multipart/form-data">
                 <div class="row">
                     <div class="input-field col s6">
-                      <input type="text" id="nome" name="nome" value="<?php echo set_value('nome'); ?>" class="validate" placeholder="Digite o nome" required autofocus>
-                      <label for="nome">Nome</label>
+                      <select name="fk_categoria" id="fk_categoria">
+                        <option value="" disabled selected>Escolha uma categoria</option>
+                        <?php foreach ($categorias as $row ): ?>
+                            <option value="<?php echo $row->idtb_categoria; ?>"><?php echo $row->nome; ?></option>
+                        <?php endforeach;?>
+                      </select>
+                      <label for="fk_categoria">Categoria</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                      <input type="email" id="email" name="email" value= "<?php echo set_value('email'); ?>" class="validate" placeholder="Digite o email" required autofocus>
-                      <label for="email">Email</label>
+                      <input type="text" id="nome" name="nome" value="<?php echo set_value('nome'); ?>" class="validate" placeholder="Digite o Produto" required autofocus>
+                      <label for="nome">Produto</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                      <input type="password" id="senha" name="senha" value= "" class="validate" placeholder="Digite a senha" required autofocus>
-                      <label for="senha">Senha</label>
+                        <textarea id="descricao" name="descricao" class="validate materialize-textarea" placeholder="Digite a descrição" title="Digite a descrição" required></textarea>
+                        <label for="descricao">Descrição</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
-                      <input type="password" id="conf_senha" name="conf_senha" value= "" class="validate" placeholder="Confirme a senha" required autofocus>
-                      <label for="conf_senha">Confirmar senha</label>
+                    <div class="file-field input-field col s6">
+                          <div class="btn">
+                            <span>Imagem</span>
+                            <input type="file" name="imagem">
+                          </div>
+                          <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                          </div>
                     </div>
                 </div>
                 <div class="row">
-                    <button title="Cadastrar usuário"  type="submit" class="btn waves-effect waves-light">Cadastrar</button>
+                    <button title="Cadastrar produto"  type="submit" class="btn waves-effect waves-light">Cadastrar</button>
                     <!-- <button  type="submit" class="btn btn-lg btn-primary" >Alterar</button> -->
                     <button title="Limpar campos" id="btn-limpar" type="reset" class="btn waves-effect waves-light">Limpar</button><br/>
                 </div>
@@ -60,7 +70,7 @@
                     <font color="#009688"><?php echo $this->session->flashdata('edicaook'); ?></font>
                 </div>
             <?php endif; ?>
-            <?php echo validation_errors('<font color="#FC5555">','</font>'); ?>
+             <?php echo validation_errors('<font color="#FC5555">','</font>'); ?>
             </form>
         </div>
     </div>
@@ -75,23 +85,19 @@
                 <thead>
                     <tr>
                         <th># </th>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>Data Cadastro</th>
+                        <th>Produto</th>
                         <th></th>
                     </tr>
                 </thead>
                  <tbody>
                 <?php 
-                    foreach($usuario as $row):
+                    foreach($produtos as $row):
                 ?>
                     <tr>
-                        <td><?php echo $row->id_usuario;?></td>
+                        <td><?php echo $row->idtb_produto;?></td>
                         <td><?php echo $row->nome;?></td>
-                        <td><?php echo $row->email;?></td>
-                        <td><?php echo $row->dt_cadastro;?></td>
                         <td>
-                            <a title="Editar essa categoria" class="btn-floating btn-large waves-effect waves-light" href="<?php echo base_url('admin/usuario/editar/'); echo "/". $row->id_usuario;?>"><i class="large material-icons">mode_edit</i></a>
+                            <a title="Editar essa categoria" class="btn-floating btn-large waves-effect waves-light" href="<?php echo base_url('admin/categoria/editar/'); echo "/". $row->slug;?>"><i class="large material-icons">mode_edit</i></a>
                             &nbsp;&nbsp;
                             <a title="Enviar para lixeira" class="btn-floating btn-large waves-effect waves-light red" href="#"><i class="large material-icons">delete</i></a>
                         </td>
