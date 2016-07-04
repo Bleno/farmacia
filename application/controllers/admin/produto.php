@@ -17,6 +17,12 @@ class Produto extends CI_Controller {
 		'view'  =>'produto',
 		'produtos' => $this->ProdutoModel->getAllProduto()->result(),
 		'categorias'  => $this->CategoriaModel->getAllCategoria()->result(),
+		'js' =>  array('ckeditor/ckeditor.js',
+						'ckeditor/samples/js/sample.js',
+						'ckeditor/config.js',
+						'ckeditor/lang/pt-br.js',
+						'ckeditor/styles.js',
+						'js/produto.js',),
 		);
 	
 		$this->load->view('admin', $dados);
