@@ -21,6 +21,7 @@ class Categoria extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('CategoriaModel');
+		$this->load->library('Datatables');
 	}
 
 
@@ -32,6 +33,10 @@ class Categoria extends CI_Controller {
 		'view'  =>'categoria',
 	    'categoria'  =>$this->CategoriaModel->getAllCategoria()->result(),
 		'Categorias'  => $this->CategoriaModel->getAllCategoria()->result(),
+		'js' => array('dataTables/jquery.dataTables.min.js',
+						'dataTables/jquery.dataTables.bootstrap.js',
+						'js/categoria.js',),
+		'css' => array('dataTables/dataTables.material.min.css',),
 		);
 	
 		$this->load->view('admin', $dados);
@@ -106,7 +111,15 @@ class Categoria extends CI_Controller {
 
 	}
 	
-
+    public function datatable()
+    {
+        $this->datatables->select('idtb_categoria, tb_categoria.nome as categoria, slug, tb_categoria.dt_cadastro, tb_categoria.dt_update, tb_usuario.nome as usuario', TRUE)
+            ->unset_column('idtb_categoria')
+            ->join('tb_usuario', 'tb_categoria.fk_usuario = tb_usuario.id_usuario', 'join')
+            ->from('tb_categoria');
+ 
+        echo $this->datatables->generate();
+    }
 
 
 	//http://stackoverflow.com/questions/2955251/php-function-to-make-slug-url-string

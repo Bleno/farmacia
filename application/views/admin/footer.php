@@ -43,5 +43,8 @@
   <?php foreach($js as $value):?>
   <script src="<?php echo base_url("static/$value"); ?>" type="text/javascript" charset="utf-8" async defer></script>
   <?php endforeach; ?>
+  <?php foreach($css as $value):?>
+  <link href="<?php echo base_url("static/$value"); ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <?php endforeach;?>
   </body>
 </html>
