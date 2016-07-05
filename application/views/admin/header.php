@@ -20,6 +20,9 @@
      flex: 1 0 auto;
     }
   </style>
+  <script type="text/javascript">
+      var base_url = "<?php echo base_url() ;?>";
+  </script>
 </head>
 <main>
 <body>

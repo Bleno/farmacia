@@ -8,15 +8,15 @@
         <div class="section">
             <form class="col s12" method="post" action="<?php echo base_url("admin/categoria/cadastrar")?>">
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s12 l6">
                       <input type="text" id="categoria" name="categoria" value= "" class="validate" placeholder="Digite a Categoria" required autofocus>
                       <label for="categoria">Categoria</label>
                     </div>
                 </div>
                 <div class="row">
-                    <button title="Cadastrar categoria"  type="submit" class="btn waves-effect waves-light">Cadastrar</button>
-                    <!-- <button  type="submit" class="btn btn-lg btn-primary" >Alterar</button> -->
-                    <button title="Limpar campos" id="btn-limpar" type="reset" class="btn waves-effect waves-light">Limpar</button><br/>
+                    <div class="input-field col s12 l6">
+                        <button title="Cadastrar categoria"  type="submit" class="btn waves-effect waves-light">Cadastrar</button>
+                    </div>
                 </div>
 
 

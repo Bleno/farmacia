@@ -32,7 +32,7 @@ if($this->session->flashdata('edicaook')):
         <div class="section">
             <form class="col s12" method="post" action="<?php echo base_url("admin/categoria/editar")?>">
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s12 l6">
                       <input value="<?php echo $categoria->nome; ?>" type="text" id="categoria" name="categoria" class="validate" placeholder="Digite a Categoria" required autofocus>
                       <input value="<?php echo $categoria->slug; ?>" type="hidden" name="slug">
                       <label for="categoria">Categoria</label>
@@ -40,8 +40,6 @@ if($this->session->flashdata('edicaook')):
                 </div>
                 <div class="row">
                     <button title="Editar categoria"  type="submit" class="btn waves-effect waves-light">Editar</button>
-                    <!-- <button  type="submit" class="btn btn-lg btn-primary" >Alterar</button> -->
-                    <button title="Limpar campos" id="btn-limpar" type="reset" class="btn waves-effect waves-light">Limpar</button><br<br>
                 </div>
 
 
@@ -78,58 +76,51 @@ if($this->session->flashdata('edicaook')):
             <div class="divider"></div>
         </div>
         <div class="section">
-            <table class="responsive-table striped highlight centered" id="tabela-categoria">
+            <table class="dataTables responsive-table striped highlight centered" id="tabela-categoria">
                 <thead>
                     <tr>
-                        <th># </th>
                         <th>Categoria</th>
-                        <th></th>
+                        <th>Usuário cadastro </th>
+                        <th>Data cadastro</th>
+                        <th>Data atualização</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
                  <tbody>
-                <?php 
-                    foreach($Categorias as $row):
-                ?>
-                    <tr>
-                        <td><?php echo $row->idtb_categoria;?></td>
-                        <td><?php echo $row->nome;?></td>
-                        <td>
-                            <a title="Editar essa categoria" class="btn-floating btn-large waves-effect waves-light" href="<?php echo base_url('admin/categoria/editar/'); echo "/". $row->slug;?>"><i class="large material-icons">mode_edit</i></a>
-                            &nbsp;&nbsp;
-                            <a title="Enviar para lixeira" class="btn-floating btn-large waves-effect waves-light red" href="#"><i class="large material-icons">delete</i></a>
-                        </td>
-                    </tr>
-                <?php 
-                    endforeach;
-                 ?>
+
                  </tbody>    
             </table>
         </div>
     </div>
 
 <script type="text/javascript">
+    var url_categoria = "<?php echo base_url('admin/categoria/editar/'); ?>";
+    function columns(){
+        var cols = [
+            {"data": "categoria"},
+            {"data": "usuario"},
+            {"data": function(data){ //dt_cadastro
+                        var dt_array = data.dt_cadastro.split(" ");
+                        var date = dt_array[0].split("-");
+                        return date[2] + "/" + date[1] + "/" + date[0] + " " + dt_array[1]
+                    }
+            },
+            {"data": function(data){ //dt_update
+                        var dt_array = data.dt_update.split(" ");
+                        var date = dt_array[0].split("-");
+                        return date[2] + "/" + date[1] + "/" + date[0] + " " + dt_array[1]
+                    }
+            },
+            {"orderable":      false, "data": function(data){ //slug options
+                        var slug = data.slug;
+                        var options = '<a title="Editar essa categoria" class="btn-floating btn waves-effect waves-light" href="'+ url_categoria + "/" + slug +'"><i class="small material-icons">mode_edit</i></a>';
+                        options += '<a title="Enviar para lixeira" class="btn-floating btn waves-effect waves-light red" href=""><i class="small material-icons">delete</i></a>';
+                        return options
+                    }
+            }
 
-    $(document).ready(function() {
-        $('.dataTables').DataTable({
-                "responsive": true,
-                "oLanguage": {
-                        "oPaginate": { "sFirst": "<<", "sLast": ">>", "sNext": ">", "sPrevious": "<" },
-                        "sEmptyTable": 'Não foram encontrados registros. Tabela Vazia!',
-                        "sInfo": "<span>Exibindo de <b>_START_</b> até <b>_END_</b> de <b>_TOTAL_</b> registros encontrados.</span>",
-                        "sInfoEmpty": " ",
-                        "sInfoFiltered": "",
-                        "sInfoThousands": ".",
-                        "sLengthMenu": "Exibir _MENU_ registros",
-                        "sLoadingRecords": "<center>Carregando...</center>",
-                        "sProcessing": '<b>Processando...</b>', //"Processando...",
-                        "sSearch": "Pesquisa:",
-                        "sZeroRecords": "<center>Não foram encontrados registros.</center>"
-                },
-                "sPaginationType": "full_numbers",
-                "bFilter": true,
-                "bProcessing": true,
-                "bServerSide": false
-        });
-    });
 
+        ];
+        return cols        
+    }
 </script>

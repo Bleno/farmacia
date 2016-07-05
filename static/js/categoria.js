@@ -15,11 +15,11 @@ $(document).ready(function() {
                     "sZeroRecords": "<center>Não foram encontrados registros.</center>"
             },
             "sPaginationType": "full_numbers",
-            //"bFilter": true,
+            "bFilter": false,
             "bProcessing": true,
             "bServerSide": true,
             "ajax": {
-                "url": "./categoria/datatable",
+                "url": base_url + "admin/categoria/datatable",
                 "type": "POST"
             },
             "columns": columns()

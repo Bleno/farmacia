@@ -105,7 +105,11 @@ class Categoria extends CI_Controller {
 		$dados = array(
 					'pasta' => 'categoria',
 					'view' => 'editar',
-					'Categorias' => $this->CategoriaModel->getAllCategoria()->result()
+					'Categorias' => $this->CategoriaModel->getAllCategoria()->result(),
+					'js' => array('dataTables/jquery.dataTables.min.js',
+									'dataTables/jquery.dataTables.bootstrap.js',
+									'js/categoria.js',),
+					'css' => array('dataTables/dataTables.material.min.css',),
 			 	);
 		$this->load->view('admin', $dados);
 
