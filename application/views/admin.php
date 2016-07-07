@@ -15,6 +15,7 @@
 
 	//Inclue o arquivo que for chamado pela controladora
 	if($pasta != '') $this->load->view('admin/'.$pasta .'/'. $view);
+	if($pasta != '' && $pasta !== "inicio") $this->load->view('admin/'.$pasta .'/listagem');
 
 	//Inclue o arquivo de rodapé
 	$this->load->view('admin/footer');

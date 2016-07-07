@@ -70,7 +70,7 @@ class ProdutoModel extends CI_Model{
 	
 	public function getAllProduto(){
 
-		$this->db->select('idtb_produto,
+		$this->db->select('id_produto,
 							tb_produto.nome as nome,
 							tb_produto.slug as slug,
 							tb_produto.descricao as detalhes,
@@ -85,7 +85,7 @@ class ProdutoModel extends CI_Model{
 
 		$this->db->order_by('nome');
 
-		$this->db->join('tb_categoria', 'tb_produto.fk_categoria = tb_categoria.idtb_categoria', 'inner');
+		$this->db->join('tb_categoria', 'tb_produto.fk_categoria = tb_categoria.id_categoria', 'inner');
 		$this->db->join('tb_usuario', 'tb_produto.fk_usuario = tb_usuario.id_usuario', 'inner');
 
 		return $this->db->get();

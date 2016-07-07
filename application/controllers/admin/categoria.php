@@ -113,8 +113,8 @@ class Categoria extends CI_Controller {
 	
     public function datatable()
     {
-        $this->datatables->select('idtb_categoria, tb_categoria.nome as categoria, slug, tb_categoria.dt_cadastro, tb_categoria.dt_update, tb_usuario.nome as usuario', TRUE)
-            ->unset_column('idtb_categoria')
+        $this->datatables->select('id_categoria, tb_categoria.nome as categoria, slug, tb_categoria.dt_cadastro, tb_categoria.dt_update, tb_usuario.nome as usuario', TRUE)
+            ->unset_column('id_categoria')
             ->join('tb_usuario', 'tb_categoria.fk_usuario = tb_usuario.id_usuario', 'join')
             ->from('tb_categoria');
  
