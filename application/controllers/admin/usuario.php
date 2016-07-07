@@ -47,7 +47,8 @@ class usuario extends CI_Controller {
 		//$email = elements(array('senha'), $this->input->post());
 		
 		$this->form_validation->set_rules('nome', 'nome', 'trim|required|max_length[45]|ucwords');
-		$this->form_validation->set_rules('email', 'email', 'trim|required|max_length[45]|strtolower|is_unique[tb_usuario.email]');
+		$this->form_validation->set_rules('sobrenome', 'sobrenome', 'trim|max_length[45]');
+		$this->form_validation->set_rules('email', 'email', 'valid_email|trim|required|max_length[45]|strtolower|is_unique[tb_usuario.email]');
 		$this->form_validation->set_rules('senha', 'senha', 'trim|required|max_length[45]|matches[conf_senha]');
 		$this->form_validation->set_rules('conf_senha', 'conf_senha', 'trim|required|max_length[45]');
 		$this->form_validation->set_message('is_unique', "O Email ". $this->input->post('email') ." já existe!");
@@ -56,10 +57,11 @@ class usuario extends CI_Controller {
 
 		if($this->form_validation->run()){
 
-			$dados = elements(array('nome', 'email', 'senha'), $this->input->post());
+			$dados = elements(array('nome', 'sobrenome', 'email', 'senha'), $this->input->post());
 			$dados['senha'] = md5($dados['senha']);
 			$dados['dt_cadastro'] = date("Y-m-d H:i:s");
 			$dados['dt_update'] = date("Y-m-d H:i:s");
+			$dados['ativo'] = 1;
 
 		    $this->UsuarioModel->insertUsuario($dados);
 		}else{

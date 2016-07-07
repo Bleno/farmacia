@@ -31,34 +31,38 @@ if($this->session->flashdata('edicaook')):
         <div class="section">
             <form class="col s12" method="post" action="<?php echo base_url("admin/usuario/editar")?>">
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s12 l6">
                       <input type="hidden" name="id_usuario" value="<?php echo $usuario->id_usuario; ?>"/>
-                      <input type="text" id="nome" name="nome" value="<?php echo $usuario->nome; ?>" class="validate" placeholder="Digite o nome" required autofocus>
+                      <input type="text" id="nome" name="nome" value="<?php echo $usuario->nome; ?>" class="validate" placeholder="Digite o nome" maxlength="45" required autofocus>
                       <label for="nome">Nome</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
-                      <input disabled type="email" id="email" name="email" value="<?php echo $usuario->email; ?>" class="validate" placeholder="Digite o email" required autofocus>
+                    <div class="input-field col s12 l6">
+                      <input type="text" id="sobrenome" name="sobrenome" value="<?php echo $usuario->sobrenome; ?>"  placeholder="Digite o sobrenome" maxlength="45">
+                      <label for="sobrenome">Sobrenome</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 l6">
+                      <input disabled type="email" id="email" name="email" value="<?php echo $usuario->email; ?>" class="validate" placeholder="Digite o email" maxlength="45" required>
                       <label for="email">Email</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
-                      <input type="password" id="senha" name="senha" value="" class="validate" placeholder="Digite a senha" required autofocus>
+                    <div class="input-field col s12 l6">
+                      <input type="password" id="senha" name="senha" value="" class="validate" placeholder="Digite a senha" maxlength="45" required>
                       <label for="senha">Senha</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
-                      <input type="password" id="conf_senha" name="conf_senha" value="" class="validate" placeholder="Confirme a senha" required autofocus>
+                    <div class="input-field col s12 l6">
+                      <input type="password" id="conf_senha" name="conf_senha" value="" class="validate" placeholder="Confirme a senha" maxlength="45" required>
                       <label for="conf_senha">Confirmar senha</label>
                     </div>
                 </div>
                 <div class="row">
                     <button title="Editar usuário"  type="submit" class="btn waves-effect waves-light">Editar</button>
-                    <!-- <button  type="submit" class="btn btn-lg btn-primary" >Alterar</button> -->
-                    <button title="Limpar campos" id="btn-limpar" type="reset" class="btn waves-effect waves-light">Limpar</button><br/>
                 </div>
 
 

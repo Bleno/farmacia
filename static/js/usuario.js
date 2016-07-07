@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var teste;
+
     $('.dataTables').DataTable({
             "responsive": true,
             "oLanguage": {

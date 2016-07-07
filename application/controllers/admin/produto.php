@@ -6,6 +6,7 @@ class Produto extends CI_Controller {
 		parent::__construct();
 		$this->load->model('ProdutoModel');
 		$this->load->model('CategoriaModel');
+		$this->load->library('Datatables');
 	}
 
 
@@ -15,14 +16,16 @@ class Produto extends CI_Controller {
 		$dados = array(
 		'pasta' =>'produto',
 		'view'  =>'produto',
-		'produtos' => $this->ProdutoModel->getAllProduto()->result(),
 		'categorias'  => $this->CategoriaModel->getAllCategoria()->result(),
 		'js' =>  array('ckeditor/ckeditor.js',
 						'ckeditor/samples/js/sample.js',
 						'ckeditor/config.js',
 						'ckeditor/lang/pt-br.js',
 						'ckeditor/styles.js',
+						'dataTables/jquery.dataTables.min.js',
+						'dataTables/jquery.dataTables.bootstrap.js',
 						'js/produto.js',),
+		'css' => array('dataTables/dataTables.material.min.css',),
 		);
 	
 		$this->load->view('admin', $dados);
@@ -75,15 +78,19 @@ class Produto extends CI_Controller {
 
 			
 		$dados = array(
-		'pasta' => 'cadastrarJaqueta',
+		'pasta' => 'produto',
 		'view' => 'editar',
-		'Jaqueta' => $this->ProdutoModel->getAllJaqueta()->result(),
-		'Jaquetas' => $this->ProdutoModel->getAllJaqueta()->result(),
-		'marca' => $this->MarcaModel->DropDownMarca(),
-		'cor'     => $this->corModel->DropDownCor(),
-		'Tamanho' => $this->TamanhoModel->DropDownTamanho(),
-		'Categoria'  => $this->CategoriaModel->DropDownCategoria(),
-		 );
+		'categorias'  => $this->CategoriaModel->getAllCategoria()->result(),
+		'js' =>  array('ckeditor/ckeditor.js',
+						'ckeditor/samples/js/sample.js',
+						'ckeditor/config.js',
+						'ckeditor/lang/pt-br.js',
+						'ckeditor/styles.js',
+						'dataTables/jquery.dataTables.min.js',
+						'dataTables/jquery.dataTables.bootstrap.js',
+						'js/produto.js',),
+		'css' => array('dataTables/dataTables.material.min.css',),
+		);
 		$this->load->view('admin', $dados);
 
 	}
@@ -135,6 +142,28 @@ class Produto extends CI_Controller {
 
   		return $text;
 	}
+
+	public function datatable(){
+        $this->datatables->select('id_produto,
+        						 imagem,
+        						 tb_produto.nome,
+        						 tb_categoria.nome as categoria,
+        						 tb_produto.slug as slug,
+        						 tb_produto.valor_venda as valor,
+        						 argumento,
+        						 descricao,
+        						 tb_usuario.nome as usuario,
+        						 tb_produto.dt_cadastro as dt_cadastro,
+        						 tb_produto.dt_update as dt_update', TRUE)
+            ->unset_column('id_produto')
+            //->order_by('tb_produto.nome')
+            ->join('tb_usuario', 'tb_produto.fk_usuario = tb_usuario.id_usuario', 'join')
+            ->join('tb_categoria', 'tb_produto.fk_categoria = tb_categoria.id_categoria', 'join')
+            ->from('tb_produto');
+ 		header('Content-Type: application/json');
+        echo $this->datatables->generate();
+    }
+
 
 }
 

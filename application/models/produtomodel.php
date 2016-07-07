@@ -19,7 +19,7 @@ class ProdutoModel extends CI_Model{
 
 		if($id != null){
 			
-			$this->db->where('idJaqueta', $id);
+			$this->db->where('id_produto', $id);
 
 			$this->db->limit(1);
 
@@ -27,14 +27,25 @@ class ProdutoModel extends CI_Model{
 		}
 	}
 		
-	public function detalhesProduto($id = null){
-		if($id != null){
+	public function getBySlug($slug = null){
 
-			$this->db->where('idJaqueta', $id);
+		if($slug != null){
+			
+			$this->db->where('slug', $slug);
 
 			$this->db->limit(1);
 
-			$this->db->select('idJaqueta ,jaqueta , quantidade, valor,tbjaqueta.descricao as detalhes ,  marca, cor, tamanho, categoria, imagem');
+			return $this->db->get('tb_produto');
+		}
+	}
+	public function detalhesProduto($id = null){
+		if($id != null){
+
+			$this->db->where('id_produto', $id);
+
+			$this->db->limit(1);
+
+			$this->db->select('id_produto ,jaqueta , quantidade, valor,tbjaqueta.descricao as detalhes ,  marca, cor, tamanho, categoria, imagem');
 	
 	
 			$this->db->from('tb_produto');
@@ -106,11 +117,11 @@ inner join tbtamanho on(tbjaqueta.idTamanho = tbtamanho.idTamanho)*/
 	{
 		if($id != null){
 
-			$query = $this->db->query("SELECT count(*) as quant FROM tbpedido where idJaqueta = $id");
+			$query = $this->db->query("SELECT count(*) as quant FROM tbpedido where id_produto = $id");
 			$row = $query->row();
 			$quantPedido = $row->quant;
 
-			$query2 = $this->db->query("SELECT quantidade  FROM tbjaqueta where idJaqueta = $id");
+			$query2 = $this->db->query("SELECT quantidade  FROM tbjaqueta where id_produto = $id");
 			$row2 = $query2->row();
 			$quantJaqueta = $row2->quantidade;
 
