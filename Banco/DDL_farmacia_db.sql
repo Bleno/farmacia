@@ -2,9 +2,6 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-DROP SCHEMA IF EXISTS `farmacia_db` ;
-CREATE SCHEMA IF NOT EXISTS `farmacia_db` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `farmacia_db` ;
 
 -- -----------------------------------------------------
 -- Table `farmacia_db`.`tb_usuario`
@@ -14,10 +11,13 @@ DROP TABLE IF EXISTS `farmacia_db`.`tb_usuario` ;
 CREATE TABLE IF NOT EXISTS `farmacia_db`.`tb_usuario` (
   `id_usuario` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
+  `sobrenome` VARCHAR(45) NULL,
   `email` VARCHAR(45) NOT NULL,
+  `ultimo_login` DATETIME NULL,
   `senha` VARCHAR(45) NOT NULL,
-  `dt_cadastro` DATETIME NULL,
-  `dt_update` VARCHAR(45) NULL,
+  `dt_cadastro` DATETIME NOT NULL,
+  `dt_update` DATETIME NOT NULL,
+  `ativo` TINYINT NOT NULL,
   PRIMARY KEY (`id_usuario`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB
@@ -30,14 +30,15 @@ COMMENT = 'Login de usuários e cadastro de usuário.';
 DROP TABLE IF EXISTS `farmacia_db`.`tb_categoria` ;
 
 CREATE TABLE IF NOT EXISTS `farmacia_db`.`tb_categoria` (
-  `idtb_categoria` INT NOT NULL AUTO_INCREMENT,
+  `id_categoria` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `slug` VARCHAR(45) NOT NULL,
   `dt_cadastro` DATETIME NOT NULL,
   `dt_update` DATETIME NOT NULL,
+  `ativo` TINYINT NOT NULL,
   `fk_usuario` INT NOT NULL,
-  PRIMARY KEY (`idtb_categoria`),
-  UNIQUE INDEX `idtb_categoria_UNIQUE` (`idtb_categoria` ASC),
+  PRIMARY KEY (`id_categoria`),
+  UNIQUE INDEX `idtb_categoria_UNIQUE` (`id_categoria` ASC),
   INDEX `fk_tb_categoria_tb_usuario1_idx` (`fk_usuario` ASC),
   UNIQUE INDEX `slug_UNIQUE` (`slug` ASC),
   CONSTRAINT `fk_tb_categoria_tb_usuario1`
@@ -55,23 +56,27 @@ COMMENT = 'cadastro de categoria do produto';
 DROP TABLE IF EXISTS `farmacia_db`.`tb_produto` ;
 
 CREATE TABLE IF NOT EXISTS `farmacia_db`.`tb_produto` (
-  `idtb_produto` INT NOT NULL AUTO_INCREMENT,
+  `id_produto` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `slug` VARCHAR(45) NOT NULL,
-  `descricao` VARCHAR(45) NOT NULL,
-  `fk_categoria` INT NOT NULL,
+  `argumento` VARCHAR(45) NULL,
+  `descricao` LONGTEXT NOT NULL,
   `dt_cadastro` DATETIME NOT NULL,
   `dt_update` DATETIME NOT NULL,
-  `fk_usuario` INT NOT NULL,
   `imagem` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idtb_produto`),
-  UNIQUE INDEX `idtb_produto_UNIQUE` (`idtb_produto` ASC),
+  `valor_venda` DECIMAL NOT NULL,
+  `valor_compra` DECIMAL NULL,
+  `ativo` TINYINT NOT NULL,
+  `fk_categoria` INT NOT NULL,
+  `fk_usuario` INT NOT NULL,
+  PRIMARY KEY (`id_produto`),
+  UNIQUE INDEX `idtb_produto_UNIQUE` (`id_produto` ASC),
   INDEX `fk_tb_produto_tb_categoria_idx` (`fk_categoria` ASC),
   INDEX `fk_tb_produto_tb_usuario1_idx` (`fk_usuario` ASC),
   UNIQUE INDEX `slug_UNIQUE` (`slug` ASC),
   CONSTRAINT `fk_tb_produto_tb_categoria`
     FOREIGN KEY (`fk_categoria`)
-    REFERENCES `farmacia_db`.`tb_categoria` (`idtb_categoria`)
+    REFERENCES `farmacia_db`.`tb_categoria` (`id_categoria`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tb_produto_tb_usuario1`
