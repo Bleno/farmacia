@@ -21,6 +21,7 @@ class usuario extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('UsuarioModel');
+		$this->load->library('Datatables');
 	}
 
 
@@ -30,7 +31,10 @@ class usuario extends CI_Controller {
 		$dados = array(
 		'pasta' =>'usuario',
 		'view'  =>'cadastrar',
-		'usuario' => $this->UsuarioModel->getAllUsuario()->result(),
+		'js' => array('dataTables/jquery.dataTables.min.js',
+						'dataTables/jquery.dataTables.bootstrap.js',
+						'js/usuario.js',),
+		'css' => array('dataTables/dataTables.material.min.css',),
 		);
 	
 		$this->load->view('admin', $dados);
@@ -65,8 +69,6 @@ class usuario extends CI_Controller {
         $dados = array(
 			'pasta' => 'usuario',
 			'view' => 'cadastrar',
-			'usuario' => $this->UsuarioModel->getAllUsuario()->result(),
-			
 			);
 		$this->load->view('admin', $dados);
 
@@ -95,11 +97,21 @@ class usuario extends CI_Controller {
 		$dados = array(
 					'pasta' => 'usuario',
 					'view' => 'editar',
-					'usuarios' => $this->UsuarioModel->getAllUsuario()->result(),
-					);
+					'js' => array('dataTables/jquery.dataTables.min.js',
+					'dataTables/jquery.dataTables.bootstrap.js',
+					'js/usuario.js',),
+					'css' => array('dataTables/dataTables.material.min.css',),
+		);
+
 		$this->load->view('admin', $dados);
 			
 	}
+	public function datatable(){
+        $this->datatables->select('id_usuario, nome, email, dt_cadastro, dt_update')
+            ->from('tb_usuario');
+ 
+        echo $this->datatables->generate();
+    }
 }
 
 /* End of file welcome.php */
