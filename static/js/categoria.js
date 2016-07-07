@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    var teste;
     $('.dataTables').DataTable({
             "responsive": true,
             "oLanguage": {
@@ -24,4 +25,9 @@ $(document).ready(function() {
             },
             "columns": columns()
     });
+    $('.dataTables').on( 'draw.dt', function () {
+             $('.modal-trigger').leanModal({
+                ready: function() { console.log("start") }
+            });
+    } );
 });

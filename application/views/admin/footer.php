@@ -40,11 +40,11 @@
   <script src="<?php echo base_url("static/js/jquery-2.1.1.min.js"); ?>"></script>
   <script src="<?php echo base_url("static/js/materialize.js"); ?>"></script>
   <script src="<?php echo base_url("static/js/init.js"); ?>"></script>
-  <?php foreach($js as $value):?>
+  <?php if(isset($js)): foreach($js as $value):?>
   <script src="<?php echo base_url("static/$value"); ?>" type="text/javascript" charset="utf-8" async defer></script>
-  <?php endforeach; ?>
-  <?php foreach($css as $value):?>
+  <?php   endforeach; endif; ?>
+  <?php if (isset($css)): foreach($css as $value):?>
   <link href="<?php echo base_url("static/$value"); ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <?php endforeach;?>
+  <?php endforeach; endif;?>
   </body>
 </html>

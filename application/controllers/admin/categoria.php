@@ -31,8 +31,6 @@ class Categoria extends CI_Controller {
 		$dados = array(
 		'pasta' =>'categoria',
 		'view'  =>'categoria',
-	    'categoria'  =>$this->CategoriaModel->getAllCategoria()->result(),
-		'Categorias'  => $this->CategoriaModel->getAllCategoria()->result(),
 		'js' => array('dataTables/jquery.dataTables.min.js',
 						'dataTables/jquery.dataTables.bootstrap.js',
 						'js/categoria.js',),
@@ -74,7 +72,6 @@ class Categoria extends CI_Controller {
 		$dados = array(
 			'pasta' => 'Categoria',
 			'view' => 'categoria',
-			'Categorias'  => $this->CategoriaModel->getAllCategoria()->result(),
 			);
 		$this->load->view('Admin', $dados);
 
@@ -105,7 +102,6 @@ class Categoria extends CI_Controller {
 		$dados = array(
 					'pasta' => 'categoria',
 					'view' => 'editar',
-					'Categorias' => $this->CategoriaModel->getAllCategoria()->result(),
 					'js' => array('dataTables/jquery.dataTables.min.js',
 									'dataTables/jquery.dataTables.bootstrap.js',
 									'js/categoria.js',),

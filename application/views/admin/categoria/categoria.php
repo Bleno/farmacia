@@ -76,7 +76,19 @@
                             &nbsp;&nbsp;
                             <a title="Enviar para lixeira" class="btn-floating btn-large waves-effect waves-light red" href="#"><i class="large material-icons">delete</i></a>
                         </td> -->
+  <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
 
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+        <h5 class="red-text">Mover para lixeira ?</h5>
+        <p id="info" data-info="BLeno"></p>
+    </div>
+    <div class="modal-footer">
+      <a href="javascript: move_to_trash();" id="move-to-trash" data-reg="" class=" modal-action modal-close waves-effect waves-green btn-flat">Sim</a>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat">Não</a>
+    </div>
+  </div>
 <script type="text/javascript">
     var url_categoria = "<?php echo base_url('admin/categoria/editar/'); ?>";
     function columns(){
@@ -95,10 +107,10 @@
                         return date[2] + "/" + date[1] + "/" + date[0] + " " + dt_array[1]
                     }
             },
-            {"sorted": false, "data": function(data){ //slug options
+            {"orderable":      false, "data": function(data){ //slug options
                         var slug = data.slug;
                         var options = '<a title="Editar essa categoria" class="btn-floating btn waves-effect waves-light" href="'+ url_categoria + "/" + slug +'"><i class="small material-icons">mode_edit</i></a>';
-                        options += '<a title="Enviar para lixeira" class="btn-floating btn waves-effect waves-light red" href=""><i class="small material-icons">delete</i></a>';
+                        options += '<a onclick="get_id(this);" title="Enviar para lixeira" data-id="'+ data.idtb_categoria +'" class="btn-floating btn waves-effect waves-light red modal-trigger" href="#modal1"><i class="small material-icons">delete</i></a>';
                         return options
                     }
             }
@@ -107,4 +119,14 @@
         ];
         return cols        
     }
+    function get_id(element){
+        var anchor = $(element);
+        var id = $(element).data('id');
+        $("#move-to-trash").attr('data-reg', id);
+    }
+    function move_to_trash(){
+        // fazer uma chamada ajax para mover para lixeira
+        alert($("#move-to-trash").data('reg'));
+    }
+
 </script>
