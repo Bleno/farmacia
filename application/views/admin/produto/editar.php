@@ -17,13 +17,13 @@ $produto = $this->ProdutoModel->getBySlug($slug)->row();
             <div class="divider"></div>
         </div>
         <div class="section">
-            <form class="col s12" method="post" action="<?php echo base_url("admin/produto/cadastrar")?>" enctype="multipart/form-data">
+            <form class="col s12" method="post" action="<?php echo base_url("admin/produto/editar")?>" enctype="multipart/form-data">
                 <div class="row">
                     <div class="input-field col s12 l6">
                       <select name="fk_categoria" id="fk_categoria">
                         <option value="" disabled selected>Escolha uma categoria</option>
                         <?php foreach ($categorias as $row ): ?>
-                            <option value="<?php echo $row->id_categoria; ?>"><?php echo $row->nome; ?></option>
+                            <option value="<?php echo $row->id_categoria; ?>" <?php if ($produto->fk_categoria == $row->id_categoria) echo "selected"; ?>><?php echo $row->nome; ?></option>
                         <?php endforeach;?>
                       </select>
                       <label for="fk_categoria">Categoria</label>
@@ -37,19 +37,19 @@ $produto = $this->ProdutoModel->getBySlug($slug)->row();
                 </div>
                 <div class="row">
                     <div class="input-field col s12 l6">
-                      <input type="text" onKeyUp="maskIt(this,event,'###.###.###,##',true)" id="valor_venda" name="valor_venda" value="<?php echo set_value('valor_venda'); ?>" class="validate" placeholder="Digite o valor" required/>
+                      <input type="text" onKeyUp="maskIt(this,event,'###.###.###,##',true)" id="valor_venda" name="valor_venda" value="<?php echo $produto->valor_venda; ?>" class="validate" placeholder="Digite o valor" required/>
                       <label for="valor_venda">Valor</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 l6">
-                      <input type="text" id="argumento" name="argumento" value="<?php echo set_value('argumento'); ?>" class="validate" placeholder="Digite o argumento" maxlength="45" required/>
+                      <input type="text" id="argumento" name="argumento" value="<?php echo $produto->argumento; ?>" class="validate" placeholder="Digite o argumento" maxlength="45" required/>
                       <label for="argumento">Argumento</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 l6">
-                        <input type="hidden" id="descricao" name="descricao" class="validate" placeholder="Digite a descrição" title="Digite a descrição" required/>
+                        <input type="hidden" id="descricao" name="descricao" value="<?php echo $produto->descricao; ?>" <?php echo 'data-action="editar"'?> class="validate" placeholder="Digite a descrição" title="Digite a descrição" required/>
                         <h6 class="header green-text">Descrição</h6>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ $produto = $this->ProdutoModel->getBySlug($slug)->row();
                     </div>
                 </div>
                 <div class="row">
-                    <button title="Cadastrar produto"  type="submit" class="btn waves-effect waves-light">Cadastrar</button>
+                    <button title="Editar"  type="submit" class="btn waves-effect waves-light">Cadastrar</button>
                 </div>
 
 
@@ -144,5 +144,6 @@ return this.split('').reverse().join(''); };
             e.preventDefault();
         }
     });*/
+
 </script>
 

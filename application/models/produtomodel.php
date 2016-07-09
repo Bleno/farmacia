@@ -26,6 +26,24 @@ class ProdutoModel extends CI_Model{
 			return $this->db->get('tb_produto');
 		}
 	}
+
+	public function get_descricao($id = null){
+		if($id != null){
+			$this->db->where('id_produto', $id);
+			$this->db->select('descricao');
+			$this->db->from('tb_produto');
+			return $this->db->get();
+		}
+	}
+
+	public function get_argumento($id = null){
+		if($id != null){
+			$this->db->where('id_produto', $id);
+			$this->db->select('argumento');
+			$this->db->from('tb_produto');
+			return $this->db->get();
+		}
+	}
 		
 	public function getBySlug($slug = null){
 

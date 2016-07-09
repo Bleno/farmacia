@@ -9,6 +9,12 @@ $(document).ready(function($) {
 	    $("#descricao").val(evt.editor.getData());
 	});
 
+    //if($("#descricao").data('action') == "editar"){
+        var editorElement = CKEDITOR.document.getById( 'editor' );
+        editorElement.setHtml( $("#descricao").val());
+
+    //}
+
     $('.dataTables').DataTable({
             "responsive": true,
             "oLanguage": {
@@ -35,6 +41,7 @@ $(document).ready(function($) {
             "columns": columns()
     });
     $('.dataTables').on( 'draw.dt', function () {
+            $('.materialboxed').materialbox();
              $('.modal-trigger').leanModal({
                 ready: function() { console.log("start") }
             });

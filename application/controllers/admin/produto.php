@@ -33,13 +33,16 @@ class Produto extends CI_Controller {
 	
 	public function cadastrar(){
 				
+		$this->form_validation->set_rules('fk_categoria', 'categoria', 'required|is_natural_no_zero');
 		$this->form_validation->set_rules('nome', 'nome', 'trim|required|max_length[45]');
+		$this->form_validation->set_rules('valor_venda', 'valor_venda', 'trim|required|max_length[10]');
+		$this->form_validation->set_rules('argumento', 'argumento', 'trim|max_length[45]');
 		$this->form_validation->set_rules('descricao', 'descricao', 'trim|required');
-		$this->form_validation->set_rules('fk_categoria', 'fk_categoria', 'required|is_natural_no_zero');
+		//$this->form_validation->set_rules('imagem', 'imagem', 'required');
 			
 		if($this->form_validation->run()){
 
-			$dados = elements(array('nome','descricao','fk_categoria','imagem'), $this->input->post());
+			$dados = elements(array('fk_categoria','nome', 'valor_venda', 'argumento','descricao','imagem'), $this->input->post());
 			$dados['fk_usuario'] = $this->session->userdata('id_usuario');
 			$dados['slug'] = $this->slugify($this->input->post('nome'));
 			$dados['imagem'] = $this->upload_foto();
@@ -51,13 +54,13 @@ class Produto extends CI_Controller {
 			$this->session->set_flashdata('erro', 'Produto já existe!');
 		}
 
-		$dados = array(
-				'pasta' => 'produto',
-				'view' => 'produto',
-				'produtos' => $this->ProdutoModel->getAllProduto()->result(),
-				'categorias' => $this->CategoriaModel->getAllCategoria()->result(),
-				 );
-		$this->load->view('admin', $dados);
+		// $dados = array(
+		// 		'pasta' => 'produto',
+		// 		'view' => 'produto',
+		// 		'categorias' => $this->CategoriaModel->getAllCategoria()->result(),
+		// 		 );
+		// $this->load->view('admin', $dados);
+		$this->index();
 			
 	}
 
@@ -164,6 +167,24 @@ class Produto extends CI_Controller {
         echo $this->datatables->generate();
     }
 
+
+    public function get_descricao(){
+
+    	$id = $this->uri->segment(4);
+    	$result = $this->ProdutoModel->get_descricao($id)->row();
+    	echo $result->descricao;
+    }
+
+    public function get_argumento(){
+
+    	$id = $this->uri->segment(4);
+    	$result = $this->ProdutoModel->get_argumento($id)->row();
+    	if($result->argumento != ""){
+    		echo $result->argumento;
+    	}else{
+    		echo "Não há argumento para este produto";
+    	}
+    }
 
 }
 
