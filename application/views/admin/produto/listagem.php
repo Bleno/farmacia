@@ -72,7 +72,10 @@
                     }
             },
             {"data": "categoria"},
-            {"data": "valor"},
+            {"data": function(data){
+                        return "R$ " + data.valor
+                    }
+            },
             {"orderable":  false, "data": function(data){
                         return '<a data-id="'+ data.id_produto +'" href="javascript: show_argumento('+ data.id_produto +')"><i class="small material-icons">zoom_in</i></a>'
                     }

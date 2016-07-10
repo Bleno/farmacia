@@ -31,14 +31,15 @@ $produto = $this->ProdutoModel->getBySlug($slug)->row();
                 </div>
                 <div class="row">
                     <div class="input-field col s12 l6">
+                      <input type="hidden" name="id_produto" value="<?php echo $produto->id_produto; ?>">
                       <input type="text" id="nome" name="nome" value="<?php echo $produto->nome; ?>" class="validate" placeholder="Digite o Produto" maxlength="45" required autofocus/>
                       <label for="nome">Produto</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 l6">
-                      <input type="text" onKeyUp="maskIt(this,event,'###.###.###,##',true)" id="valor_venda" name="valor_venda" value="<?php echo $produto->valor_venda; ?>" class="validate" placeholder="Digite o valor" required/>
-                      <label for="valor_venda">Valor</label>
+                      <input type="text" onKeyUp="maskIt(this,event,'###.###.###,##',true)" id="valor" name="valor" value="<?php echo $produto->valor; ?>" class="validate" placeholder="Digite o valor" required/>
+                      <label for="valor">Valor</label>
                     </div>
                 </div>
                 <div class="row">
@@ -68,7 +69,7 @@ $produto = $this->ProdutoModel->getBySlug($slug)->row();
                     </div>
                 </div>
                 <div class="row">
-                    <button title="Editar"  type="submit" class="btn waves-effect waves-light">Cadastrar</button>
+                    <button title="Editar produto"  type="submit" class="btn waves-effect waves-light">Editar</button>
                 </div>
 
 
@@ -125,7 +126,7 @@ w.value = pre+ret+pos; }
 String.prototype.reverse = function(){
 return this.split('').reverse().join(''); };
 
-/*    $("#valor_venda").keydown(function (e) {
+/*    $("#valor").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
              // Allow: Ctrl+A

@@ -26,8 +26,8 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 l6">
-                      <input type="text" onKeyUp="maskIt(this,event,'###.###.###,##',true)" id="valor_venda" name="valor_venda" value="<?php echo set_value('valor_venda'); ?>" class="validate" placeholder="Digite o valor" required/>
-                      <label for="valor_venda">Valor</label>
+                      <input type="text" onKeyUp="maskIt(this,event,'###.###.###,##',true)" id="valor" name="valor" value="<?php echo set_value('valor'); ?>" class="validate" placeholder="Digite o valor" required/>
+                      <label for="valor">Valor</label>
                     </div>
                 </div>
                 <div class="row">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 l6">
-                        <input type="hidden" id="descricao" name="descricao" class="validate" placeholder="Digite a descrição" title="Digite a descrição" required/>
+                        <input type="hidden" id="descricao" name="descricao" value="<?php echo set_value('descricao'); ?>" class="validate" placeholder="Digite a descrição" title="Digite a descrição" required/>
                         <h6 class="header green-text">Descrição</h6>
                     </div>
                 </div>
@@ -114,7 +114,7 @@ w.value = pre+ret+pos; }
 String.prototype.reverse = function(){
 return this.split('').reverse().join(''); };
 
-/*    $("#valor_venda").keydown(function (e) {
+/*    $("#valor").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
              // Allow: Ctrl+A

@@ -23,9 +23,9 @@ class Produto extends CI_Controller {
 						'ckeditor/lang/pt-br.js',
 						'ckeditor/styles.js',
 						'dataTables/jquery.dataTables.min.js',
-						'dataTables/jquery.dataTables.bootstrap.js',
+						'dataTables/dataTables.materialize.js',
 						'js/produto.js',),
-		'css' => array('dataTables/dataTables.material.min.css',),
+		'css' => array('dataTables/dataTables.materialize.css',),
 		);
 	
 		$this->load->view('admin', $dados);
@@ -34,15 +34,17 @@ class Produto extends CI_Controller {
 	public function cadastrar(){
 				
 		$this->form_validation->set_rules('fk_categoria', 'categoria', 'required|is_natural_no_zero');
-		$this->form_validation->set_rules('nome', 'nome', 'trim|required|max_length[45]');
-		$this->form_validation->set_rules('valor_venda', 'valor_venda', 'trim|required|max_length[10]');
+		$this->form_validation->set_rules('nome', 'produto', 'trim|required|max_length[45]');
+		$this->form_validation->set_rules('valor', 'valor', 'trim|required|max_length[10]');
 		$this->form_validation->set_rules('argumento', 'argumento', 'trim|max_length[45]');
-		$this->form_validation->set_rules('descricao', 'descricao', 'trim|required');
-		//$this->form_validation->set_rules('imagem', 'imagem', 'required');
+		$this->form_validation->set_rules('descricao', 'descrição', 'trim|required');
+		if(empty($_FILES['imagem']['name'])){
+		    $this->form_validation->set_rules('imagem', 'imagem', 'required');
+		}
 			
 		if($this->form_validation->run()){
 
-			$dados = elements(array('fk_categoria','nome', 'valor_venda', 'argumento','descricao','imagem'), $this->input->post());
+			$dados = elements(array('fk_categoria','nome', 'valor', 'argumento','descricao','imagem'), $this->input->post());
 			$dados['fk_usuario'] = $this->session->userdata('id_usuario');
 			$dados['slug'] = $this->slugify($this->input->post('nome'));
 			$dados['imagem'] = $this->upload_foto();
@@ -66,17 +68,25 @@ class Produto extends CI_Controller {
 
 	public function editar(){
 
-		$this->form_validation->set_rules('Jaqueta', 'Jaqueta', 'trim|required|max_length[45]|strtolower|ucwords');
-		$this->form_validation->set_rules('idJaqueta', 'idJaqueta', 'required');
+		$this->form_validation->set_rules('fk_categoria', 'categoria', 'required|is_natural_no_zero');
+		$this->form_validation->set_rules('nome', 'produto', 'trim|required|max_length[45]');
+		$this->form_validation->set_rules('valor', 'valor', 'trim|required|max_length[10]');
+		$this->form_validation->set_rules('argumento', 'argumento', 'trim|max_length[45]');
+		$this->form_validation->set_rules('descricao', 'descrição', 'trim|required');
+			
+		if($this->form_validation->run()){
 
-			if($this->form_validation->run()){
-				
-				$dados = elements(array('marca','flagAtivo'), $this->input->post());
-
-				$this->MarcaModel->updateMarca($dados, array('idJaqueta' => $this->input->post('idJaqueta')));
-
+			$update = elements(array('fk_categoria','nome', 'valor', 'argumento','descricao'), $this->input->post());
+			$update['fk_usuario'] = $this->session->userdata('id_usuario');
+			$update['slug'] = $this->slugify($this->input->post('nome'));
+			if(!empty($_FILES['imagem']['name'])){
+				$update['imagem'] = $this->upload_foto();
+			}
+			$update['dt_update'] = date("Y-m-d H:i:s");
+	
+			$this->ProdutoModel->updateProduto($update, array('id_produto'=> $this->input->post('id_produto') ));
 		}else{
-			$this->session->set_flashdata('erro', 'Jaqueta já existe!');
+			$this->session->set_flashdata('erro', 'Produto já existe!');
 		}
 
 			
@@ -152,7 +162,7 @@ class Produto extends CI_Controller {
         						 tb_produto.nome,
         						 tb_categoria.nome as categoria,
         						 tb_produto.slug as slug,
-        						 tb_produto.valor_venda as valor,
+        						 tb_produto.valor as valor,
         						 argumento,
         						 descricao,
         						 tb_usuario.nome as usuario,

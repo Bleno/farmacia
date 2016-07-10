@@ -13,6 +13,18 @@ class ProdutoModel extends CI_Model{
 			redirect('admin/produto');
 		}
 	}
+
+	public function updateProduto($dados = null, $condition = null){
+
+		if($dados != null && $condition != null){
+
+			$this->db->update('tb_produto', $dados, $condition);
+
+			$this->session->set_flashdata('edicaook', 'Alteração realizada com sucesso.');
+
+			redirect('admin/produto');
+		}
+	}
 	
 
 	public function getById($id = null){
@@ -108,25 +120,11 @@ class ProdutoModel extends CI_Model{
 							tb_produto.dt_update as atualizacao,
 							tb_usuario.nome as usuario,
 							imagem');
-
-
 		$this->db->from('tb_produto');
-
 		$this->db->order_by('nome');
-
 		$this->db->join('tb_categoria', 'tb_produto.fk_categoria = tb_categoria.id_categoria', 'inner');
 		$this->db->join('tb_usuario', 'tb_produto.fk_usuario = tb_usuario.id_usuario', 'inner');
-
 		return $this->db->get();
-
-/*//$this->db->join('tb_docente', 'tb_docente.id = ta_mapeamento.id_docente', 'inner');
-inner join tbmarca on(tbjaqueta.idMarca = tbmarca.idMarca)
-inner join tbcor on(tbjaqueta.idCor = tbcor.idCor )
-inner join tbstatus on(tbjaqueta.idStatus = tbstatus.idStatus)
-inner join tbtamanho on(tbjaqueta.idTamanho = tbtamanho.idTamanho)*/
-
-
-
 	}
 
 
