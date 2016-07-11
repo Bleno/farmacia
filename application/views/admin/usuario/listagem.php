@@ -11,6 +11,7 @@
                         <th>Email</th>
                         <th>Data Cadastro</th>
                         <th>Data Atualização</th>
+                        <th>Ativo</th>
                         <th>Opções</th>
                     </tr>
                 </thead>
@@ -53,6 +54,14 @@
                         return date[2] + "/" + date[1] + "/" + date[0] + " " + dt_array[1]
                     }
             },
+            {"data": function(data){
+                        if(data.ativo == "1"){
+                            return "Sim"
+                        }else{
+                            return "Não"
+                        }
+                    }
+            },
             {"orderable":      false, "data": function(data){ //options
                         var id_usuario = data.id_usuario;
                         var options = '<a title="Editar essa categoria" class="btn-floating btn waves-effect waves-light" href="'+ url_usuario + "/" + id_usuario +'"><i class="small material-icons">mode_edit</i></a>';
@@ -71,8 +80,11 @@
         $("#move-to-trash").attr('data-reg', id);
     }
     function move_to_trash(){
-        // fazer uma chamada ajax para mover para lixeira
-        alert($("#move-to-trash").data('reg'));
+        var id = $("#move-to-trash").data('reg')
+        $.post(base_url + 'admin/usuario/inativar', {id_usuario: id}, function(data, textStatus, xhr) {
+            /*optional stuff to do after success */
+            Materialize.toast('Usuário inativado com sucesso!', 4000)
+        });
     }
 
 </script>

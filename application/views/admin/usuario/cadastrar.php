@@ -21,7 +21,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 l6">
-                      <input type="email" id="email" name="email" value= "<?php echo set_value('email'); ?>" class="validate" placeholder="Digite o email" maxlength="45" required>
+                      <input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" value= "<?php echo set_value('email'); ?>" class="validate" placeholder="Digite o email" maxlength="45" required>
                       <label for="email">Email</label>
                     </div>
                 </div>
