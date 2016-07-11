@@ -14,7 +14,7 @@ class UsuarioModel extends CI_Model{
 		}
 	}
 	
-		public function getById($id = null){
+	public function getById($id = null){
 
 		if($id != null){
 			
@@ -36,6 +36,28 @@ class UsuarioModel extends CI_Model{
 			$this->session->set_flashdata('edicaook', 'Cadastro alterado com sucesso.');
 
 			redirect(current_url());
+		}
+	}
+
+	public function inativarUsuario($id = null){
+		if($id != null){
+			$dados = array('ativo' => 0);
+			$condition = array('id_usuario' => $id);
+			$this->db->update('tb_usuario', $dados, $condition);
+			if($query->num_rows == 1){
+				return true;
+			}
+		}
+	}
+
+	public function ativarUsuario($id = null){
+		if($id != null){
+			$dados = array('ativo' => 1);
+			$condition = array('id_usuario' => $id);
+			$this->db->update('tb_usuario', $dados, $condition);
+			if($query->num_rows == 1){
+				return true;
+			}
 		}
 	}
 

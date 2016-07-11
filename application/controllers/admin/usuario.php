@@ -109,10 +109,30 @@ class usuario extends CI_Controller {
 			
 	}
 	public function datatable(){
-        $this->datatables->select('id_usuario, nome, email, dt_cadastro, dt_update')
+        $this->datatables->select('id_usuario, nome, email, ativo, dt_cadastro, dt_update')
             ->from('tb_usuario');
  
         echo $this->datatables->generate();
+    }
+
+    public function ativar(){
+    	$id = $this->input->post('id_usuario');
+    	$result = $this->UsuarioModel->inativarUsuario($id);
+    	if($result){
+    		echo "DELETED";
+    	}else{
+    		echo "ERROR";
+    	}
+    }
+
+    public function inativar(){
+    	$id = $this->input->post('id_usuario');
+    	$result =  $this->UsuarioModel->ativarUsuario($id);
+    	if($result){
+    		echo "DELETED";
+    	}else{
+    		echo "ERROR";
+    	}
     }
 }
 
