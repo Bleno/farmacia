@@ -45,7 +45,7 @@ class Categoria extends CI_Controller {
 
 		$Categoria = elements(array('categoria'), $this->input->post());
 
-		$this->form_validation->set_rules('categoria', 'Categoria', 'trim|required|max_length[45]');//|is_unique[TbCategoria.categoria]
+		$this->form_validation->set_rules('categoria', 'Categoria', 'trim|required|max_length[45]|callback_slug_exists');//|is_unique[TbCategoria.categoria]
 
 		//$this->form_validation->set_message('is_unique', "A descrição da". $Categoria['categoria'] ." já existe.");
 
@@ -70,10 +70,11 @@ class Categoria extends CI_Controller {
 		}
 
 		$dados = array(
-			'pasta' => 'Categoria',
+			'pasta' => 'categoria',
 			'view' => 'categoria',
 			);
-		$this->load->view('Admin', $dados);
+		//$this->load->view('admin', $dados);
+		$this->index();
 
 
 
@@ -146,6 +147,19 @@ class Categoria extends CI_Controller {
   		}
 
   		return $text;
+	}
+
+
+	public function slug_exists($str){
+		$slug = $this->slugify($str);
+		$query = $this->db->query("SELECT slug FROM tb_categoria WHERE slug = '$slug'");
+
+		if ($query->num_rows() > 0){
+			$this->form_validation->set_message('slug_exists', 'Essa categoria já existe!');
+			return FALSE;
+		}else{
+			return TRUE;
+		}
 	}
 
 }//End class categoria
