@@ -48,4 +48,13 @@ $(document).ready(function($) {
     } );
 
 
+
+
 });
+
+    function validate_produto(){
+        var categoria = $("#fk_categoria").val();
+        if (categoria == "" || categoria == null){
+            return false
+        }
+    }
