@@ -80,6 +80,10 @@ class Produto extends CI_Controller {
 			$update['fk_usuario'] = $this->session->userdata('id_usuario');
 			$update['slug'] = $this->slugify($this->input->post('nome'));
 			if(!empty($_FILES['imagem']['name'])){
+				//$slug = $this->input->post('slug');
+				$slug = $update['slug'];
+				$produto = $this->ProdutoModel->getBySlug($slug)->row();
+				$this->delete_file("./produtos/".$produto->imagem);
 				$update['imagem'] = $this->upload_foto();
 			}
 			$update['dt_update'] = date("Y-m-d H:i:s");
@@ -100,9 +104,9 @@ class Produto extends CI_Controller {
 						'ckeditor/lang/pt-br.js',
 						'ckeditor/styles.js',
 						'dataTables/jquery.dataTables.min.js',
-						'dataTables/jquery.dataTables.bootstrap.js',
+						'dataTables/dataTables.materialize.js',
 						'js/produto.js',),
-		'css' => array('dataTables/dataTables.material.min.css',),
+		'css' => array('dataTables/dataTables.materialize.css',),
 		);
 		$this->load->view('admin', $dados);
 
@@ -196,7 +200,16 @@ class Produto extends CI_Controller {
     	}
     }
 
-}
+    private function delete_file($path){
+    	//$this->load->helper('file');
+    	 error_log($path);
+    	unlink($path);
+    }
+
+
+    
+
+} //Fim class
 
 
        
