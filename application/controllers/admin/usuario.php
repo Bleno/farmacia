@@ -32,9 +32,9 @@ class usuario extends CI_Controller {
 		'pasta' =>'usuario',
 		'view'  =>'cadastrar',
 		'js' => array('dataTables/jquery.dataTables.min.js',
-						'dataTables/jquery.dataTables.bootstrap.js',
+						'dataTables/dataTables.materialize.js',
 						'js/usuario.js',),
-		'css' => array('dataTables/dataTables.material.min.css',),
+		'css' => array('dataTables/dataTables.materialize.css',),
 		);
 	
 		$this->load->view('admin', $dados);
