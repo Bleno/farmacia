@@ -14,15 +14,16 @@ class CategoriaModel extends CI_Model{
 		}
 	}
 	
-	
-	//Objeto da lista de categoria 
-    //na lateral do site
-	
+	/* Mostrar as categorias para um select html
+	    Tras só categorias ativas
+	 */
 	public function getAllCategoria(){
 
 		$this->db->from('tb_categoria');
 
 		$this->db->order_by('nome');
+
+		$this->db->where(array('ativo' => 1));
 
 		return $this->db->get();
 	}
