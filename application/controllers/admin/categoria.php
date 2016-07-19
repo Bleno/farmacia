@@ -60,9 +60,7 @@ class Categoria extends CI_Controller {
 			$insert['dt_cadastro'] = date("Y-m-d H:i:s");
 			$insert['dt_update'] = date("Y-m-d H:i:s");
 			$insert['fk_usuario'] = $this->session->userdata('id_usuario');
-
-
-			$dados['flagAtivo'] = 1;
+			$insert['ativo'] = 1;
 
 			$this->CategoriaModel->insertCategoria($insert);
 		}else{
@@ -113,7 +111,7 @@ class Categoria extends CI_Controller {
 	}
 	
     public function datatable(){
-        $this->datatables->select('id_categoria, tb_categoria.nome as categoria, slug, tb_categoria.dt_cadastro, tb_categoria.dt_update, tb_usuario.nome as usuario', TRUE)
+        $this->datatables->select('id_categoria, tb_categoria.nome as categoria, slug, tb_categoria.dt_cadastro, tb_categoria.dt_update,tb_categoria.ativo as ativo ,tb_usuario.nome as usuario', TRUE)
             ->unset_column('id_categoria')
             ->join('tb_usuario', 'tb_categoria.fk_usuario = tb_usuario.id_usuario', 'join')
             ->from('tb_categoria');
@@ -161,5 +159,25 @@ class Categoria extends CI_Controller {
 			return TRUE;
 		}
 	}
+
+	public function ativar(){
+    	$id = $this->input->post('id_categoria');
+    	$result = $this->CategoriaModel->ativarCategoria($id);
+    	if($result){
+    		echo "ATIVADO";
+    	}else{
+    		echo "ERROR";
+    	}
+    }
+
+    public function inativar(){
+    	$id = $this->input->post('id_categoria');
+    	$result =  $this->CategoriaModel->inativarCategoria($id);
+    	if($result){
+    		echo "DELETED";
+    	}else{
+    		echo "ERROR";
+    	}
+    }
 
 }//End class categoria

@@ -62,7 +62,7 @@
                         }
                     }
             },
-            {"orderable":      false, "data": function(data){ //options
+            {"orderable":   false, "data": function(data){ //options
                         var id_usuario = data.id_usuario;
                         var options = '<a title="Editar essa categoria" class="btn-floating btn waves-effect waves-light" href="'+ url_usuario + "/" + id_usuario +'"><i class="small material-icons">mode_edit</i></a>';
                         if(data.ativo == "1"){

@@ -26,7 +26,7 @@
   <div id="modal1" class="modal">
     <div class="modal-content">
         <h5 class="red-text">Mover para lixeira ?</h5>
-        <p id="info" data-info="BLeno"></p>
+        <p id="info">Mover para lixeira vai impedir de cadastrar novos produtos com essa <b>categoria</b></p>
     </div>
     <div class="modal-footer">
       <a href="javascript: move_to_trash();" id="move-to-trash" data-reg="" class=" modal-action modal-close waves-effect waves-green btn-flat">Sim</a>
@@ -52,9 +52,17 @@
                     }
             },
             {"orderable":      false, "data": function(data){ //slug options
-                        var slug = data.slug;
-                        var options = '<a title="Editar essa categoria" class="btn-floating btn waves-effect waves-light" href="'+ url_categoria + "/" + slug +'"><i class="small material-icons">mode_edit</i></a>';
-                        options += '<a onclick="get_id(this);" title="Enviar para lixeira" data-id="'+ data.id_categoria +'" class="btn-floating btn waves-effect waves-light red modal-trigger" href="#modal1"><i class="small material-icons">delete</i></a>';
+                        //var slug = data.slug;
+                        //var options = '<a title="Editar essa categoria" class="btn-floating btn waves-effect waves-light" href="'+ url_categoria + "/" + slug +'"><i class="small material-icons">mode_edit</i></a>';
+                        //options += '<a onclick="get_id(this);" title="Enviar para lixeira" data-id="'+ data.id_categoria +'" class="btn-floating btn waves-effect waves-light red modal-trigger" href="#modal1"><i class="small material-icons">delete</i></a>';
+                        //return options
+                        var id_categoria = data.id_categoria;
+                        var options = '<a title="Editar essa categoria" class="btn-floating btn waves-effect waves-light" href="'+ url_categoria + "/" + id_categoria +'"><i class="small material-icons">mode_edit</i></a>';
+                        if(data.ativo == "1"){
+                            options += '<a onclick="get_id(this);" title="Inativar categoria" data-id="'+ id_categoria +'" class="btn-floating btn waves-effect waves-light red modal-trigger" href="#modal1"><i class="small material-icons">thumb_down</i></a>';
+                        }else{
+                            options += '<a onclick="ativar_categoria(this);" title="Ativar categoria" data-id="'+ id_categoria +'" class="btn-floating btn waves-effect waves-light green"><i class="small material-icons">thumb_up</i></a>';
+                        }
                         return options
                     }
             }
@@ -69,8 +77,22 @@
         $("#move-to-trash").attr('data-reg', id);
     }
     function move_to_trash(){
-        // fazer uma chamada ajax para mover para lixeira
-        alert($("#move-to-trash").data('reg'));
+        var id = $("#move-to-trash").data('reg')
+        $.post(base_url + 'admin/categoria/inativar', {id_categoria: id}, function(data, textStatus, xhr) {
+            /*optional stuff to do after success */
+            Materialize.toast('Categoria inativada com sucesso!', 6000)
+            var table = $(".dataTable" ).dataTable().api();
+            table.ajax.reload();
+        });
+    }
+    function ativar_categoria(element) {
+        var id = $(element).data('id');
+        $.post(base_url + 'admin/categoria/ativar', {id_categoria: id}, function(data, textStatus, xhr) {
+            /*optional stuff to do after success */
+            Materialize.toast('Categoria ativada com sucesso!', 6000);
+            var table = $(".dataTable" ).dataTable().api();
+            table.ajax.reload();
+        });
     }
 
 </script>

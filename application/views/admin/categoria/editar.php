@@ -1,11 +1,11 @@
 <?php 
 
 //Pega o seguimento 4 da url
-$slug = $this->uri->segment(4);
+$id = $this->uri->segment(4);
 
-if($slug == null) redirect('admin/categoria');
+if($id == null) redirect('admin/categoria');
 
-$categoria = $this->CategoriaModel->getBySlug($slug)->row();
+$categoria = $this->CategoriaModel->getById($id)->row();
 
 if($this->session->flashdata('edicaook')):
 ?>

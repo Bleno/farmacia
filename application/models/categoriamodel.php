@@ -79,7 +79,7 @@ class CategoriaModel extends CI_Model{
 
 		if($id != null){
 			
-			$this->db->where('idCategoria', $id);
+			$this->db->where('id_categoria', $id);
 
 			$this->db->limit(1);
 
@@ -109,6 +109,26 @@ class CategoriaModel extends CI_Model{
 			$this->session->set_flashdata('edicaook', 'Alteração realizada com sucesso.');
 
 			redirect('admin/categoria');
+		}
+	}
+
+	public function inativarCategoria($id = null){
+		if($id != null){
+			$dados = array('ativo' => 0, 'dt_update' => date("Y-m-d H:i:s"));
+			$condition = array('id_categoria' => $id);
+			$this->db->update('tb_categoria', $dados, $condition);
+			return true;
+
+		}
+	}
+
+	public function ativarCategoria($id = null){
+		if($id != null){
+			$dados = array('ativo' => 1, 'dt_update' => date("Y-m-d H:i:s"));
+			$condition = array('id_categoria' => $id);
+			$this->db->update('tb_categoria', $dados, $condition);
+			return true;
+
 		}
 	}
 		
