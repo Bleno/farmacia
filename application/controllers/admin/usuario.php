@@ -72,7 +72,8 @@ class usuario extends CI_Controller {
 			'pasta' => 'usuario',
 			'view' => 'cadastrar',
 			);
-		$this->load->view('admin', $dados);
+		//$this->load->view('admin', $dados);
+		$this->index();
 
 
 	}

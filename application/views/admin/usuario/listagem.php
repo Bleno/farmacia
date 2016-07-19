@@ -28,7 +28,7 @@
   <div id="modal1" class="modal">
     <div class="modal-content">
         <h5 class="red-text">Inativar usuário ?</h5>
-        <p id="info" data-info="BLeno"></p>
+        <p id="info"></p>
     </div>
     <div class="modal-footer">
       <a href="javascript: move_to_trash();" id="move-to-trash" data-reg="" class=" modal-action modal-close waves-effect waves-green btn-flat">Sim</a>
@@ -88,6 +88,8 @@
         $.post(base_url + 'admin/usuario/inativar', {id_usuario: id}, function(data, textStatus, xhr) {
             /*optional stuff to do after success */
             Materialize.toast('Usuário inativado com sucesso!', 6000)
+            var table = $(".dataTable" ).dataTable().api();
+            table.ajax.reload();
         });
     }
 
@@ -95,7 +97,9 @@
         var id = $(element).data('id');
         $.post(base_url + 'admin/usuario/ativar', {id_usuario: id}, function(data, textStatus, xhr) {
             /*optional stuff to do after success */
-            Materialize.toast('Usuário ativado com sucesso!', 6000)
+            Materialize.toast('Usuário ativado com sucesso!', 6000);
+            var table = $(".dataTable" ).dataTable().api();
+            table.ajax.reload();
         });
     }
 
