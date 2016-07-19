@@ -6,7 +6,7 @@
             <div class="divider"></div>
         </div>
         <div class="section">
-            <form class="col s12" method="post" action="<?php echo base_url("admin/produto/cadastrar")?>" enctype="multipart/form-data">
+            <form id="form-produto" class="col s12" method="post" action="<?php echo base_url("admin/produto/cadastrar")?>" enctype="multipart/form-data">
                 <div class="row">
                     <div class="input-field col s12 l6">
                       <select name="fk_categoria" id="fk_categoria">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button title="Cadastrar produto"  type="submit" class="btn waves-effect waves-light">Cadastrar</button>
+                    <button  onclick="validate_produto()" title="Cadastrar produto"  type="submit" class="btn waves-effect waves-light">Cadastrar</button>
                 </div>
 
 

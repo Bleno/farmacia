@@ -27,7 +27,7 @@
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
     <div class="modal-content">
-        <h5 class="red-text">Mover para lixeira ?</h5>
+        <h5 class="red-text">Inativar usuário ?</h5>
         <p id="info" data-info="BLeno"></p>
     </div>
     <div class="modal-footer">
@@ -65,7 +65,11 @@
             {"orderable":      false, "data": function(data){ //options
                         var id_usuario = data.id_usuario;
                         var options = '<a title="Editar essa categoria" class="btn-floating btn waves-effect waves-light" href="'+ url_usuario + "/" + id_usuario +'"><i class="small material-icons">mode_edit</i></a>';
-                        options += '<a onclick="get_id(this);" title="Enviar para lixeira" data-id="'+ id_usuario +'" class="btn-floating btn waves-effect waves-light red modal-trigger" href="#modal1"><i class="small material-icons">delete</i></a>';
+                        if(data.ativo == "1"){
+                            options += '<a onclick="get_id(this);" title="Inativar usuário" data-id="'+ id_usuario +'" class="btn-floating btn waves-effect waves-light red modal-trigger" href="#modal1"><i class="small material-icons">thumb_down</i></a>';
+                        }else{
+                            options += '<a onclick="ativar_usuario(this);" title="Ativar usuário" data-id="'+ id_usuario +'" class="btn-floating btn waves-effect waves-light green"><i class="small material-icons">thumb_up</i></a>';
+                        }
                         return options
                     }
             }
@@ -83,7 +87,15 @@
         var id = $("#move-to-trash").data('reg')
         $.post(base_url + 'admin/usuario/inativar', {id_usuario: id}, function(data, textStatus, xhr) {
             /*optional stuff to do after success */
-            Materialize.toast('Usuário inativado com sucesso!', 4000)
+            Materialize.toast('Usuário inativado com sucesso!', 6000)
+        });
+    }
+
+    function ativar_usuario(element){
+        var id = $(element).data('id');
+        $.post(base_url + 'admin/usuario/ativar', {id_usuario: id}, function(data, textStatus, xhr) {
+            /*optional stuff to do after success */
+            Materialize.toast('Usuário ativado com sucesso!', 6000)
         });
     }
 

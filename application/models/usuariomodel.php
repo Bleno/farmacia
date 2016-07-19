@@ -41,23 +41,21 @@ class UsuarioModel extends CI_Model{
 
 	public function inativarUsuario($id = null){
 		if($id != null){
-			$dados = array('ativo' => 0);
+			$dados = array('ativo' => 0, 'dt_update' => date("Y-m-d H:i:s"));
 			$condition = array('id_usuario' => $id);
 			$this->db->update('tb_usuario', $dados, $condition);
-			if($query->num_rows == 1){
-				return true;
-			}
+			return true;
+
 		}
 	}
 
 	public function ativarUsuario($id = null){
 		if($id != null){
-			$dados = array('ativo' => 1);
+			$dados = array('ativo' => 1, 'dt_update' => date("Y-m-d H:i:s"));
 			$condition = array('id_usuario' => $id);
 			$this->db->update('tb_usuario', $dados, $condition);
-			if($query->num_rows == 1){
-				return true;
-			}
+			return true;
+
 		}
 	}
 

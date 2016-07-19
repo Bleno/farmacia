@@ -117,9 +117,9 @@ class usuario extends CI_Controller {
 
     public function ativar(){
     	$id = $this->input->post('id_usuario');
-    	$result = $this->UsuarioModel->inativarUsuario($id);
+    	$result = $this->UsuarioModel->ativarUsuario($id);
     	if($result){
-    		echo "DELETED";
+    		echo "ATIVADO";
     	}else{
     		echo "ERROR";
     	}
@@ -127,7 +127,7 @@ class usuario extends CI_Controller {
 
     public function inativar(){
     	$id = $this->input->post('id_usuario');
-    	$result =  $this->UsuarioModel->ativarUsuario($id);
+    	$result =  $this->UsuarioModel->inativarUsuario($id);
     	if($result){
     		echo "DELETED";
     	}else{

@@ -64,6 +64,14 @@
                     <font color="#009688"><?php echo $this->session->flashdata('edicaook'); ?></font>
                 </div>
             <?php endif; ?>
+            <?php if($this->session->flashdata('cadastrook')): ?>
+                <script>
+                setTimeout(function(){
+                    Materialize.toast('<?php echo $this->session->flashdata("cadastrook"); ?>', 6000);
+                 }, 2000);
+                </script>
+            <?php endif; ?>
+
             <?php echo validation_errors('<font color="#FC5555">','</font>'); ?>
             </form>
         </div>
