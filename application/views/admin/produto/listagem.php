@@ -29,7 +29,7 @@
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
     <div class="modal-content">
-        <h5 class="red-text">Mover para lixeira ?</h5>
+        <h5 class="red-text">Excluir permanentemente esse produto ?</h5>
         <p id="info"></p>
     </div>
     <div class="modal-footer">
@@ -38,11 +38,21 @@
     </div>
   </div>
 
+  <!-- Modal Structure -->
+  <div id="modalinativar" class="modal">
+    <div class="modal-content">
+        <h5 class="red-text">Inativar esse produto ?</h5>
+        <p id="info"></p>
+    </div>
+    <div class="modal-footer">
+      <a href="javascript: inativar_produto();" id="inativa-produto" data-reg="" class=" modal-action modal-close waves-effect waves-green btn-flat">Sim</a>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat">Não</a>
+    </div>
+  </div>
+
 <!-- Modal Structure description -->
 <div id="show-descricao-modal" class="modal modal-fixed-footer">
     <div class="modal-content" id="show-descricao">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
@@ -53,8 +63,6 @@
 <!-- Modal Structure argumento -->
 <div id="show-argumento-modal" class="modal modal-fixed-footer">
     <div class="modal-content" id="show-argumento">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
@@ -98,10 +106,14 @@
                     }
             },
             {"orderable":  false, "data": function(data){ // options
-                        var slug = data.slug;
-                        var options = '<a title="Editar esse produto" class="btn-floating btn waves-effect waves-light" href="'+ url_categoria + "/" + slug +'"><i class="small material-icons">mode_edit</i></a>';
+                        var options = '<a title="Editar esse produto" class="btn-floating btn waves-effect waves-light" href="'+ url_categoria + "/" + data.id_produto +'"><i class="small material-icons">mode_edit</i></a>';
                         options += '<a onclick="move_to_trash(this);" title="Enviar para lixeira" data-id="'+ data.id_produto +'" class="btn-floating btn waves-effect waves-light red modal-trigger" href="#modal1"><i class="small material-icons">delete</i></a>';
                         options += '<a title="Previsão" data-id="'+ data.id_produto +'" class="btn-floating btn waves-effect waves-light blue modal-trigger" href="#modal1"><i class="small material-icons">visibility</i></a>';
+                        if (data.ativo == "1"){
+                            options += '<a title="Inativar produto" onclick="inativa(this);" data-id="'+ data.id_produto +'" class="btn-floating btn waves-effect waves-light red modal-trigger" href="#modalinativar"><i class="small material-icons">thumb_down</i></a>'; 
+                        }else{
+                            options += '<a onclick="ativar_produto(this);" title="Ativar produto" data-id="'+ data.id_produto +'" class="btn-floating btn waves-effect waves-light green"><i class="small material-icons">thumb_up</i></a>';
+                        }
                         return options
                     }
             }
@@ -124,10 +136,10 @@
     function confirm_delete(){
         // fazer uma chamada ajax para mover para lixeira
         var id = $("#move-to-trash").data('reg');
-        alert(id);
         $.post(base_url + 'admin/produto/delete', {'id_produto': id}, function(data, textStatus, xhr) {
             /*optional stuff to do after success */
-            console.log("DELETADO!");
+            var table = $(".dataTable" ).dataTable().api();
+            table.ajax.reload()
         });
     }
 
@@ -151,6 +163,31 @@
                 $('#show-argumento-modal').openModal();
             }
         )
+    }
+
+    function inativa(element){
+        var id = get_id(element);
+        $("#inativa-produto").attr('data-reg', id);
+    }
+
+    function inativar_produto() {
+        var id = $("#inativa-produto").data('reg');
+        $.post(base_url + 'admin/produto/inativar', {id_produto: id}, function(data, textStatus, xhr) {
+            /*optional stuff to do after success */
+            Materialize.toast('Produto inativado com sucesso!', 6000);
+            var table = $(".dataTable" ).dataTable().api();
+            table.ajax.reload();
+        });
+    }
+
+    function ativar_produto(element) {
+        var id = $(element).data('id');
+        $.post(base_url + 'admin/produto/ativar', {id_produto: id}, function(data, textStatus, xhr) {
+            /*optional stuff to do after success */
+            Materialize.toast('Produto ativado com sucesso!', 6000);
+            var table = $(".dataTable" ).dataTable().api();
+            table.ajax.reload();
+        });
     }
 
 </script>

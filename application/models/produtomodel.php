@@ -68,29 +68,6 @@ class ProdutoModel extends CI_Model{
 			return $this->db->get('tb_produto');
 		}
 	}
-	public function detalhesProduto($id = null){
-		if($id != null){
-
-			$this->db->where('id_produto', $id);
-
-			$this->db->limit(1);
-
-			$this->db->select('id_produto ,jaqueta , quantidade, valor,tbjaqueta.descricao as detalhes ,  marca, cor, tamanho, categoria, imagem');
-	
-	
-			$this->db->from('tb_produto');
-	
-			$this->db->order_by('jaqueta');
-	
-			$this->db->join('tbmarca', 'tbjaqueta.idMarca = tbmarca.idMarca', 'inner');
-			$this->db->join('tbcor', 'tbjaqueta.idCor = tbcor.idCor ', 'inner');
-		    $this->db->join('tbtamanho', 'tbjaqueta.idTamanho = tbtamanho.idTamanho', 'inner');
-			$this->db->join('tbCategoria', 'tbjaqueta.idCategoria = tbCategoria.idCategoria', 'inner');
-	
-			return $this->db->get();
-							
-		}
-	}
 		
 
 	
@@ -128,38 +105,32 @@ class ProdutoModel extends CI_Model{
 	}
 
 
-
-	public function JaquetasDisponiveis($id=null)
-	{
+	public function inativarProduto($id = null){
 		if($id != null){
+			$dados = array('ativo' => 0, 'dt_update' => date("Y-m-d H:i:s"));
+			$condition = array('id_produto' => $id);
+			$this->db->update('tb_produto', $dados, $condition);
+			return true;
 
-			$query = $this->db->query("SELECT count(*) as quant FROM tbpedido where id_produto = $id");
-			$row = $query->row();
-			$quantPedido = $row->quant;
-
-			$query2 = $this->db->query("SELECT quantidade  FROM tbjaqueta where id_produto = $id");
-			$row2 = $query2->row();
-			$quantJaqueta = $row2->quantidade;
-
-			return $quantJaqueta - $quantPedido;
 		}
 	}
 
+	public function ativarProduto($id = null){
+		if($id != null){
+			$dados = array('ativo' => 1, 'dt_update' => date("Y-m-d H:i:s"));
+			$condition = array('id_produto' => $id);
+			$this->db->update('tb_produto', $dados, $condition);
+			return true;
 
-	public function getJaquetaByCategoria($idCategoria = null)
-	{
-
-		if($idCategoria != null){
-		
-			$this->db->where('idCategoria', $idCategoria);
-			$this->db->from('tb_produto');
-
-			$this->db->order_by('Jaqueta');
-
-			//$this->db->where('ativo', 1);
-
-			return $this->db->get();	
 		}
-
 	}
+
+	public function deleteProduto($id=null){
+		if ($id != null) {
+			$this->db->where('id_produto', $id);
+			$this->db->delete('tb_produto');
+			return true;
+		}
+	}
+
 }

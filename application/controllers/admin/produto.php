@@ -48,8 +48,10 @@ class Produto extends CI_Controller {
 			$dados['fk_usuario'] = $this->session->userdata('id_usuario');
 			$dados['slug'] = $this->slugify($this->input->post('nome'));
 			$dados['imagem'] = $this->upload_foto();
-			$dados['dt_cadastro'] = date("Y-m-d H:i:s");
-			$dados['dt_update'] = date("Y-m-d H:i:s");
+			$date = date("Y-m-d H:i:s");
+			$dados['dt_cadastro'] = $date;
+			$dados['dt_update'] = $date;
+			$dados['ativo'] = 1;
 	
 			$this->ProdutoModel->insertProduto($dados);
 		}else{
@@ -80,10 +82,7 @@ class Produto extends CI_Controller {
 			$update['fk_usuario'] = $this->session->userdata('id_usuario');
 			$update['slug'] = $this->slugify($this->input->post('nome'));
 			if(!empty($_FILES['imagem']['name'])){
-				//$slug = $this->input->post('slug');
-				$slug = $update['slug'];
-				$produto = $this->ProdutoModel->getBySlug($slug)->row();
-				$this->delete_file("./produtos/".$produto->imagem);
+				$this->delete_file($this->input->post('id_produto'));
 				$update['imagem'] = $this->upload_foto();
 			}
 			$update['dt_update'] = date("Y-m-d H:i:s");
@@ -170,6 +169,7 @@ class Produto extends CI_Controller {
         						 argumento,
         						 descricao,
         						 tb_usuario.nome as usuario,
+        						 tb_produto.ativo as ativo,
         						 tb_produto.dt_cadastro as dt_cadastro,
         						 tb_produto.dt_update as dt_update', TRUE)
             ->unset_column('id_produto')
@@ -200,14 +200,58 @@ class Produto extends CI_Controller {
     	}
     }
 
-    private function delete_file($path){
+    private function delete_file($id = null){
     	//$this->load->helper('file');
-    	 error_log($path);
-    	unlink($path);
+    	if($id != null){
+    		$produto = $this->ProdutoModel->getById($id)->row();
+    		$path = './produtos/'.$produto->imagem;
+    		error_log($path);
+    		unlink($path);
+    	}
     }
 
 
-    
+    public function slug_exists($str){
+		$slug = $this->slugify($str);
+		$query = $this->db->query("SELECT slug FROM tb_categoria WHERE slug = '$slug'");
+
+		if ($query->num_rows() > 0){
+			$this->form_validation->set_message('slug_exists', 'Essa categoria já existe!');
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	}
+
+	public function ativar(){
+    	$id = $this->input->post('id_produto');
+    	$result = $this->ProdutoModel->ativarProduto($id);
+    	if($result){
+    		echo "ATIVADO";
+    	}else{
+    		echo "ERROR";
+    	}
+    }
+
+    public function inativar(){
+    	$id = $this->input->post('id_produto');
+    	$result =  $this->ProdutoModel->inativarProduto($id);
+    	if($result){
+    		echo "DELETED";
+    	}else{
+    		echo "ERROR";
+    	}
+    }
+
+    public function delete(){
+    	$this->delete_file($this->input->post('id_produto'));
+    	$result = $this->ProdutoModel->deleteProduto($this->input->post('id_produto'));
+    	if($result){
+    		echo "DELETED";
+    	}else{
+    		echo "ERROR";
+    	}
+    }
 
 } //Fim class
 
