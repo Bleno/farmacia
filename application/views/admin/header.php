@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Starter Template - Materialize</title>
+  <title><?php echo ucfirst($pasta); ?> - Painel administrativo</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -26,7 +26,7 @@
 </head>
 <main>
 <body>
-    <nav class="light-blue lighten-1" role="navigation">
+    <nav class="teal lighten-2" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Painel Administrativo</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="<?php echo base_url("admin/produto"); ?>">Produto</a></li>
