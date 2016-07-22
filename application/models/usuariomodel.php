@@ -69,8 +69,7 @@ class UsuarioModel extends CI_Model{
 		return $this->db->get();
 	}
 
-
-		//Pega o usuario que tenha o login e a senha cadastrada no banco de dados
+	//Pega o usuario que tenha o login e a senha cadastrada no banco de dados
 	public function getUsuario($dados = null){
 
 		if($dados != null){
@@ -84,35 +83,14 @@ class UsuarioModel extends CI_Model{
 			$query = $this->db->get('tb_usuario');
 
 			//Verifica se foi encontrado um registro com os dados igual a das condições
-			if($query->num_rows){	
-				//Retorna o registro com os dados semelhantes ao aos dados que foram informados		
-				return $query->result_array();
-			}
-		}
-	}
-	
-	public function getUsuarioloja($dados = null){
-
-		if($dados != null){
-
-			//Monta a consulta com a seguintes condições
-			$this->db->where('login', $dados['login']);
-			//$this->db->where('senha', sha1($dados['senha']));
-			$this->db->where('senha', md5($dados['senha']) );
-
-			//Armazena os registro na variavel query
-			$query = $this->db->get('tb_usuario');
-
-			//Verifica se foi encontrado um registro com os dados igual a das condições
-			if($query->num_rows){	
+			if($query->num_rows == 1){	
 				//Retorna o registro com os dados semelhantes ao aos dados que foram informados		
 				return $query->result_array();
 			}
 		}
 	}
 
-
-		//Método responsavel pela verificação do login e senha no banco de dados
+	//Método responsavel pela verificação do login e senha no banco de dados
 	public function doValidate($dados = null){
 
 		if($dados != null){
@@ -131,25 +109,13 @@ class UsuarioModel extends CI_Model{
 			}
 		}
 	}
-	
-	
-	public function doValidateloja($dados = null){
-
-		if($dados != null){
-
-			//Monta a consulta com a seguintes condições
-			$this->db->where('login', $dados['login']);
-			//$this->db->where('senha', sha1($dados['senha']));
-			$this->db->where('senha', md5($dados['senha'] ) );
-
-			//Armazena os registro na variavel query
-			$query = $this->db->get('tb_usuario');
-
-			//Verifica se foi encontrado um registro com os dados igual a das condições
-			if($query->num_rows == 1){				
-				return true;
-			}
+	/*
+		Atualizar o ultimo login do usuário
+	*/
+	public function updateLastLogin($dados = null, $condition = null){
+		if ($dados != null && $condition != null ){
+			$this->db->update('tb_usuario', $dados, $condition);
 		}
 	}
 	
-	}
+} // fim class

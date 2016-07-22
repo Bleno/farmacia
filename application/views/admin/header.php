@@ -27,18 +27,19 @@
 <main>
 <body>
     <nav class="teal lighten-2" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Painel Administrativo</a>
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="<?php echo base_url("admin");?>" class="brand-logo flow-text">Painel Administrativo</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="<?php echo base_url("admin/produto"); ?>">Produto</a></li>
                 <li><a href="<?php echo base_url("admin/categoria"); ?>">Categoria</a></li>
                 <li><a href="<?php echo base_url("admin/usuario"); ?>">Usuários</a></li>
-                <li><a href="#"><?php echo $this->session->userdata('nome'); ?></a></li>
+                <li><a href="<?php echo base_url("admin/login/logout") ; ?>">Sair</a></li>
             </ul>
             <ul id="nav-mobile" class="side-nav">
-                <li><a href="#"><?php echo $this->session->userdata('nome'); ?></a></li>
                 <li><a href="<?php echo base_url("admin/produto"); ?>">Produto</a></li>
                 <li><a href="<?php echo base_url("admin/categoria"); ?>">Categoria</a></li>
                 <li><a href="<?php echo base_url("admin/usuario"); ?>">Usuários</a></li>
+                <li><a href="<?php echo base_url("admin/login/logout") ; ?>">Sair</a></li>
             </ul>
             <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>

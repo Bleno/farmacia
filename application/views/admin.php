@@ -5,7 +5,7 @@
 	Se existir mostra o admin com seu conteudo e as outras view
 	Se não redireciona para a tela de login
 */
-//if($this->session->userdata('is_logged_in') && $this->session->userdata('nivelAcesso') == 2){
+if($this->session->userdata('is_logged_in')){
 
 	//Inclue o arquivo de cabeçalho
 	$this->load->view('admin/header');
@@ -23,9 +23,9 @@
 //}else if($this->session->userdata('is_logged_in') && $this->session->userdata('nivelAcesso') == 1){
 	//Não descomentar//$this->session->set_flashdata('loginInvalido', 'Usuário ou Senha invalidos.');
 //	redirect('Principal');
-//}else{
-	//redirect('admin/login');
-//}
+}else{
+	redirect('admin/login');
+}
 ?>
 
 

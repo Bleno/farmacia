@@ -43,24 +43,30 @@ class login extends CI_Controller {
         if($this->form_validation->run()){
 
             //Pega os valores que esta no post e transforma em array
-            $dados = elements(array('login', 'senha'), $this->input->post());
+            $post = elements(array('login', 'senha'), $this->input->post());
 
             //Verifica se os dados estão validos enviando os valores para a model
-            if($this->LoginModel->doValidate($dados)){
+            if($this->LoginModel->doValidate($post)){
 
                 //Retorna todas as informações do usuario
-                $dados = $this->LoginModel->getUsuario($dados);
+                $usuario = $this->LoginModel->getUsuario($post);
                 
                 //Dados de sessão do usuario
                 $session = array(
-                        'id_usuario'      => $dados[0]['id_usuario'],
-                        'nome'    => $dados[0]['nome'],
-                        'email'        => $dados[0]['login'],
-                        'is_logged_in' => true
+                        'id_usuario'      => $usuario[0]['id_usuario'],
+                        'nome'    => $usuario[0]['nome'],
+                        'email'        => $usuario[0]['login'],
+                        'is_logged_in' => true,
+                        'ultimo_login' => $usuario[0]['ultimo_login']
                 );
 
                 //Enviar os dados para a view
                 $this->session->set_userdata($session);
+
+                //update data session user
+                $dados = array('ultimo_login'=> date("Y-m-d H:i:s"));
+                $condition = array('id_usuario'=> $usuario[0]['id_usuario']);
+                $this->LoginModel->updateLastLogin($dados, $condition);
 
                 //Redireciona para a pagina principal
                 redirect('admin');
@@ -85,11 +91,13 @@ class login extends CI_Controller {
         //Verifica se a sessão existi 
         if($this->session->userdata('is_logged_in')){
             //Destroy a session do usuario
+            //Dados de sessão do usuario
             $session = array(
-                'id'           => '',
-                'nivelAcesso'    => '',
-                'login'        => '',
-                'is_logged_in' => false
+                    'id_usuario' => '',
+                    'nome'    => '',
+                    'email'   => '',
+                    'is_logged_in' => false,
+                    'ultimo_login' => ''
             );
 
             $this->session->unset_userdata($session);
