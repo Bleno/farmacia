@@ -21,8 +21,6 @@ class Principal extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('CategoriaModel');
-		$this->load->model('JaquetaModel');
 	}
 
 
@@ -32,8 +30,6 @@ class Principal extends CI_Controller {
 		$dados = array(
 		'pasta' => 'loja',
 		'view'  => 'inicio',
-		'categorias' => $this->CategoriaModel->getAllCategoria()->result(),
-		'jaquetas'    => $this->JaquetaModel->getLojaJaqueta()->result(),
 		);
 		
 		//redirect('Principal/categoria');
