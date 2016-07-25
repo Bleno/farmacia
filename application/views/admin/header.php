@@ -28,11 +28,11 @@
 <body>
     <nav class="teal lighten-2" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="<?php echo base_url("admin");?>" class="brand-logo flow-text">Painel Administrativo</a>
+            <a id="logo-container" href="<?php echo base_url("admin");?>" class="brand-logo">Painel Administrativo</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="<?php echo base_url("admin/produto"); ?>">Produto</a></li>
-                <li><a href="<?php echo base_url("admin/categoria"); ?>">Categoria</a></li>
-                <li><a href="<?php echo base_url("admin/usuario"); ?>">Usuários</a></li>
+                <li <?php if ($pasta == 'produto'): ?> class="active" <?php endif; ?> ><a href="<?php echo base_url("admin/produto"); ?>">Produto</a></li>
+                <li <?php if ($pasta == 'categoria'): ?> class="active" <?php endif; ?> ><a href="<?php echo base_url("admin/categoria"); ?>">Categoria</a></li>
+                <li <?php if ($pasta == 'usuario'): ?> class="active" <?php endif; ?> ><a href="<?php echo base_url("admin/usuario"); ?>">Usuários</a></li>
                 <li><a href="<?php echo base_url("admin/login/logout") ; ?>">Sair</a></li>
             </ul>
             <ul id="nav-mobile" class="side-nav">
