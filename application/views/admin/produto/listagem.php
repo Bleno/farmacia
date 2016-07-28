@@ -75,7 +75,7 @@
         var cols = [
             {"data": "nome"},
             {"orderable":  false, "data": function(data){
-                        return '<img class="materialboxed" width="30" height="30" src="'+ base_url + 'produtos/'+ data.imagem +'" alt="'+ data.nome +'">'
+                        return '<img class="materialboxed" width="30" height="30" src="'+ base_url + 'produtos_images/'+ data.imagem +'" alt="'+ data.nome +'">'
                         //return 'imagem'
                     }
             },
@@ -85,11 +85,11 @@
                     }
             },
             {"orderable":  false, "data": function(data){
-                        return '<a data-id="'+ data.id_produto +'" href="javascript: show_argumento('+ data.id_produto +')"><i class="small material-icons">zoom_in</i></a>'
+                        return '<a title="Mostrar argumento" data-id="'+ data.id_produto +'" href="javascript: show_argumento('+ data.id_produto +')"><i class="small material-icons">zoom_in</i></a>'
                     }
             },
             {"orderable":  false, "data": function(data){
-                        return '<a data-id="'+ data.id_produto +'" href="javascript: show_descricao('+ data.id_produto +')"><i class="small material-icons">zoom_in</i></a>'
+                        return '<a title="Mostrar descrição" data-id="'+ data.id_produto +'" href="javascript: show_descricao('+ data.id_produto +')"><i class="small material-icons">zoom_in</i></a>'
                     }
             },
             {"data": "usuario"},

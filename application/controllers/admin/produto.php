@@ -112,7 +112,7 @@ class Produto extends CI_Controller {
 	}
 
 	function upload_foto(){
-		$config['upload_path'] = './produtos';
+		$config['upload_path'] = './produtos_images';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$config['max_size']	= '0';
 		$config['max_width']  = '0';
@@ -204,7 +204,7 @@ class Produto extends CI_Controller {
     	//$this->load->helper('file');
     	if($id != null){
     		$produto = $this->ProdutoModel->getById($id)->row();
-    		$path = './produtos/'.$produto->imagem;
+    		$path = './produtos_images/'.$produto->imagem;
     		error_log($path);
     		unlink($path);
     	}

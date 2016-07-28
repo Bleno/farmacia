@@ -68,25 +68,11 @@ class ProdutoModel extends CI_Model{
 			return $this->db->get('tb_produto');
 		}
 	}
-		
-
-	
-	public function getLojaJaqueta(){
-
-     	$this->db->from('tb_produto');
-
-		$this->db->order_by('Jaqueta');
-
-		//$this->db->where('ativo', 1);
-
-		return $this->db->get();
-	
-	
-	}
-	
-	
-	
-	public function getAllProduto(){
+			
+	/*
+	  Pega o produto por uma determinada categoria
+	 */
+	public function getProdutoByCategoria($id_categoria){
 
 		$this->db->select('id_produto,
 							tb_produto.nome as nome,
@@ -95,12 +81,46 @@ class ProdutoModel extends CI_Model{
 							tb_categoria.nome as categoria,
 							tb_produto.dt_cadastro as cadastro,
 							tb_produto.dt_update as atualizacao,
-							tb_usuario.nome as usuario,
+							tb_categoria.slug as categoria_slug,
+							argumento,
+							valor,
 							imagem');
 		$this->db->from('tb_produto');
 		$this->db->order_by('nome');
 		$this->db->join('tb_categoria', 'tb_produto.fk_categoria = tb_categoria.id_categoria', 'inner');
-		$this->db->join('tb_usuario', 'tb_produto.fk_usuario = tb_usuario.id_usuario', 'inner');
+
+		$this->db->order_by('tb_produto.nome');
+
+		$this->db->where('fk_categoria', $id_categoria);
+		$this->db->where('tb_produto.ativo', 1);
+
+		return $this->db->get();
+	}
+	
+	
+	
+	public function getAllProduto(){
+
+		$this->db->select(' id_produto,
+							tb_produto.nome as nome,
+							tb_produto.slug as slug,
+							tb_produto.descricao as detalhes,
+							tb_categoria.nome as categoria,
+							tb_produto.dt_cadastro as cadastro,
+							tb_produto.dt_update as atualizacao,
+							tb_categoria.slug as categoria_slug,
+							argumento,
+							valor,
+							imagem');
+		$this->db->from('tb_produto');
+		$this->db->order_by('nome');
+		$this->db->join('tb_categoria', 'tb_produto.fk_categoria = tb_categoria.id_categoria', 'inner');
+
+		$this->db->order_by('tb_produto.nome');
+
+		//$this->db->where('fk_categoria', $id_categoria);
+		$this->db->where('tb_produto.ativo', 1);
+
 		return $this->db->get();
 	}
 
