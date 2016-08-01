@@ -55,7 +55,7 @@ class login extends CI_Controller {
                 $session = array(
                         'id_usuario'      => $usuario[0]['id_usuario'],
                         'nome'    => $usuario[0]['nome'],
-                        'email'        => $usuario[0]['login'],
+                        'email'        => $usuario[0]['email'],
                         'is_logged_in' => true,
                         'ultimo_login' => $usuario[0]['ultimo_login']
                 );

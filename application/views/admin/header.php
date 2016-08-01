@@ -33,14 +33,27 @@
                 <li <?php if ($pasta == 'produto'): ?> class="active" <?php endif; ?> ><a href="<?php echo base_url("admin/produto"); ?>">Produto</a></li>
                 <li <?php if ($pasta == 'categoria'): ?> class="active" <?php endif; ?> ><a href="<?php echo base_url("admin/categoria"); ?>">Categoria</a></li>
                 <li <?php if ($pasta == 'usuario'): ?> class="active" <?php endif; ?> ><a href="<?php echo base_url("admin/usuario"); ?>">Usuários</a></li>
-                <li><a href="<?php echo base_url("admin/login/logout") ; ?>">Sair</a></li>
+                <li><a href="#" data-activates="slide-out" id="lateral"><i class="material-icons">settings</i></a></li>
             </ul>
             <ul id="nav-mobile" class="side-nav">
                 <li><a href="<?php echo base_url("admin/produto"); ?>">Produto</a></li>
                 <li><a href="<?php echo base_url("admin/categoria"); ?>">Categoria</a></li>
                 <li><a href="<?php echo base_url("admin/usuario"); ?>">Usuários</a></li>
-                <li><a href="<?php echo base_url("admin/login/logout") ; ?>">Sair</a></li>
+                <li><a href="#" data-activates="slide-out" id="lateral2"><i class="material-icons">settings</i></a></li>
             </ul>
             <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
     </nav>
+    <ul id="slide-out" class="side-nav">
+    <li>
+      <div class="userView">
+        <a href="#!user" class="center"><i class="material-icons large white-text">supervisor_account</i></a>
+        <a href="#!name"><span class="white-text name"><b><?php echo strtoupper($this->session->userdata('nome')); ?></b></span></a>
+        <a href="#!email"><span class="white-text email"><?php echo $this->session->userdata('email'); ?></span></a>
+      </div>
+    </li>
+    <li><a href="#!">Mudar Senha</a></li>
+    <li><a href="#!">Perfil</a></li>
+    <li><div class="divider"></div></li>
+    <li><a href="<?php echo base_url("admin/login/logout"); ?>">Sair</a></li>
+    </ul>
