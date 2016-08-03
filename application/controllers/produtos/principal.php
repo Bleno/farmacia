@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Produtos extends CI_Controller {
+class Principal extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -33,26 +33,4 @@ class Produtos extends CI_Controller {
 		$this->load->view('principal', $dados);
 	}
 
-
-	/*
-	  Pega o slug da url e faz a pesquisa no db
-	  produto/categoria-do-produto
-	 */
-	function get_categoria($slug_categoria){
-
-		$id_categoria = $this->CategoriaModel->getBySlug($slug_categoria)->row()->id_categoria;
-
-		$dados = array(
-		'pasta' => 'site/produtos',
-		'view'  => 'categoria',
-		'categorias' => $this->CategoriaModel->getAllCategoria()->result(),
-		'produtos'  => $this->ProdutoModel->getProdutoByCategoria($id_categoria)->result(),
-		);
-		
-		//redirect('Principal/categoria');
-		$this->load->view('principal', $dados);
-	}
 }
-
-/* End of file produtos.php */
-/* Location: ./application/controllers/produtos.php */

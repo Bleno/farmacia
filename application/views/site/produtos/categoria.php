@@ -1,20 +1,36 @@
 <div class="container">
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 	<div class="section"></div>
-	<div class="section"></div>
-	<div class="card">
-		<div class="card-content light-blue lighten-1">
-			<h5 class="white-text">PRODUTOS</h4>
+	<div class="section">
+		<div class="row">
+			<div class="col s12 l12">
+				<h4 class="orange-text center">PRODUTOS</h4>
+			</div>
 		</div>
+	</div>
+	<div class="">
+<!-- 		<div class="card-content light-blue lighten-1">
+			<h5 class="white-text">PRODUTOS</h4>
+		</div> -->
 		<div class="card-content">
 			<div class="row">
 				<div class="col s12 l2">
 					<div class="collection">
 					<?php foreach ($categorias as $categoria): ?>
-						<a class="collection-item <?php echo ($this->uri->segment(2) == $categoria->slug)? "active":"" ?>" href="<?php echo base_url("produtos/$categoria->slug"); ?>"><?php echo $categoria->nome; ?></a>
+						<a class="collection-item <?php echo ($this->uri->segment(3) == $categoria->slug)? "active":"" ?>" href="<?php echo base_url("produtos/categoria/$categoria->slug"); ?>"><?php echo $categoria->nome; ?></a>
 					<?php endforeach; ?>
 					</div>
 				</div>
 				<div class="col s12 l10">
+					<?php if(empty($produtos)): ?>
+						<div class="col s12 l4">
+							<div><p class="center-align"><b><?php echo "Não há produto nessa categoria"; ?></b></p></div>	
+						</div>
+					<?php endif;?>
 					<?php $count = 1; ?>
 					<?php foreach ($produtos as $produto): ?>
 						<?php if ($count > 3): $count = 1; endif;?>

@@ -1,16 +1,27 @@
 <div class="container">
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 	<div class="section"></div>
-	<div class="section"></div>
-	<div class="card">
-		<div class="card-content light-blue lighten-1">
-			<h5 class="white-text">PRODUTOS</h4>
+	<div class="section">
+		<div class="row">
+			<div class="col s12 l12">
+				<h4 class="orange-text center">PRODUTOS</h4>
+			</div>
 		</div>
+	</div>
+	<div class="">
+<!-- 		<div class="card-content light-blue lighten-1">
+			<h5 class="white-text">PRODUTOS</h5>
+		</div> -->
 		<div class="card-content">
 			<div class="row">
 				<div class="col s12 l2">
 					<div class="collection">
 					<?php foreach ($categorias as $categoria): ?>
-						<a class="collection-item" href="<?php echo base_url("produtos/$categoria->slug"); ?>"><?php echo $categoria->nome; ?></a>
+						<a class="collection-item" href="<?php echo base_url("produtos/categoria/$categoria->slug"); ?>"><?php echo $categoria->nome; ?></a>
 					<?php endforeach; ?>
 					</div>
 				</div>

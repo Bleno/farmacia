@@ -40,7 +40,7 @@
 
 $route['default_controller'] = "principal";
 
-$route['produtos/(:any)'] = "produtos/get_categoria/$1";
+$route['produtos/categoria/(:any)'] = "produtos/categoria/get_categoria/$1";
 
 $route['categoria/(:any)'] = "categoria/get_categoria/$1";
 
