@@ -153,4 +153,43 @@ class ProdutoModel extends CI_Model{
 		}
 	}
 
+
+
+	//Destinado a paginação no codeigniter
+    public function record_count() {
+        return $this->db->count_all("tb_produto");
+    }
+
+
+    public function fetch_countries($limit, $start) {
+        $this->db->limit($limit, $start);
+
+        $this->db->select(' id_produto,
+							tb_produto.nome as nome,
+							tb_produto.slug as slug,
+							tb_produto.descricao as detalhes,
+							tb_categoria.nome as categoria,
+							tb_produto.dt_cadastro as cadastro,
+							tb_produto.dt_update as atualizacao,
+							tb_categoria.slug as categoria_slug,
+							argumento,
+							valor,
+							imagem');
+		#$this->db->from('tb_produto');
+		$this->db->order_by('nome');
+		$this->db->join('tb_categoria', 'tb_produto.fk_categoria = tb_categoria.id_categoria', 'inner');
+
+		$this->db->order_by('tb_produto.nome');
+
+		$this->db->where('tb_produto.ativo', 1);
+        $query = $this->db->get("tb_produto");
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+   }
 }

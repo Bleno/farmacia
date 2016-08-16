@@ -103,7 +103,7 @@
 	        <li <?php if($view == 'dicas'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("orcamentos"); ?>">Dicas</a></li>
 	        <li <?php if($view == 'contato'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("contato"); ?>">Contato</a></li>
 	      </ul>
-	      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons grey-text">menu</i></a>
+	      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons green-text">menu</i></a>
 	    </div>
 	</nav>
     

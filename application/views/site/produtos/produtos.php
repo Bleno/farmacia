@@ -48,6 +48,11 @@
 		  				<?php endforeach; ?>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col s12 l12">
+				 	<p><?php echo $links; ?></p>
+				 </div>
+			</div>
 		</div>
 	</div>
 </div>
