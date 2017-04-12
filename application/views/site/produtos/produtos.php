@@ -1,21 +1,17 @@
 <div class="container">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-	<div class="section"></div>
-	<div class="section">
+<!-- 	<div class="section">
 		<div class="row">
 			<div class="col s12 l12">
 				<h4 class="orange-text center">PRODUTOS</h4>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<div class="">
-<!-- 		<div class="card-content light-blue lighten-1">
-			<h5 class="white-text">PRODUTOS</h5>
-		</div> -->
+		<div class="row">
+			<div class="col s12 l12">
+				<h4 class="orange-text center">PRODUTOS</h4>
+			</div>
+		</div>
 		<div class="card-content">
 			<div class="row">
 				<div class="col s12 l2">
@@ -30,10 +26,10 @@
 					<?php foreach ($produtos as $produto): ?>
 						<?php if ($count > 3): $count = 1; endif;?>
 					<?php if( $count == 1 ): ?>	<div class="row"> <?php endif; ?>
-		  				<div class="col s12 l4">
+		  				<div class="col s6 l4">
 							<div class="card small">
 								<div class="card-image">
-									<img src="<?php echo base_url("produtos_images/$produto->imagem"); ?>" alt="">
+									<img src="<?php echo base_url("produtos_images/$produto->imagem"); ?>" alt="<?php echo $produto->nome; ?>">
 								</div>
 								<div class="card-content">
 									<p><?php echo $produto->nome; ?></p>

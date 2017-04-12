@@ -52,8 +52,7 @@
         <a href="#!email"><span class="white-text email"><?php echo $this->session->userdata('email'); ?></span></a>
       </div>
     </li>
-    <li><a href="#!">Mudar Senha</a></li>
-    <li><a href="#!">Perfil</a></li>
+    <li><a href="<?php echo base_url("admin/usuario/alterar_senha"); ?>">Mudar Senha</a></li>
     <li><div class="divider"></div></li>
     <li><a href="<?php echo base_url("admin/login/logout"); ?>">Sair</a></li>
     </ul>

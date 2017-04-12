@@ -6,5 +6,7 @@
   	$("#lateral").sideNav(); //side nav
   	$("#lateral2").sideNav(); //side nav
 
+
+  	$('.slider').slider({full_width: true});
   }); // end of document ready
 })(jQuery); // end of jQuery name space

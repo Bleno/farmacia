@@ -33,16 +33,21 @@ class Contato extends CI_Controller {
 	public function index(){
     
     /* Set a few basic form validation rules */
-    $this->form_validation->set_rules('name', "Name", 'required');
+    $this->form_validation->set_rules('nome', "Nome", 'required');
+    $this->form_validation->set_rules('email', "Email", 'required');
+    $this->form_validation->set_rules('telefone', "Telefone", 'required');
     $this->form_validation->set_rules('captcha', "Captcha", 'required');
     
     /* Get the user's entered captcha value from the form */
-    $userCaptcha = set_value('captcha');
+    $userCaptcha = $this->input->post('captcha');
     
     /* Get the actual captcha value that we stored in the session (see below) */
     $word = $this->session->userdata('captchaWord');
       
-      
+    $this->form_validation->set_message('Captcha não confere!');
+     log_message('debug', 'Some variable was correctly set');
+     error_log($word);
+     error_log($userCaptcha);
       
     /* Check if form (and captcha) passed validation*/
     if ($this->form_validation->run() == TRUE &&
@@ -56,11 +61,13 @@ class Contato extends CI_Controller {
       
       
       /* Get the user's name from the form */
-      $name = set_value('name');
+      $nome = $this->input->post('nome');
     
       /* Pass in the user input to the success view for display */
-      $data = array('name' => $name);
-      $this->load->view('success-view', $data);
+      $dados = array('nome' => $nome,
+                    'pasta' => 'site/contato',
+                    'view' => 'success-view');
+      $this->load->view('principal', $dados);
 
 
     }

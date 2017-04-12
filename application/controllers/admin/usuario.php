@@ -135,6 +135,10 @@ class usuario extends CI_Controller {
     		echo "ERROR";
     	}
     }
+
+    public function alterar_senha(){
+    	echo "Alterar senha";
+    }
 }
 
 /* End of file welcome.php */

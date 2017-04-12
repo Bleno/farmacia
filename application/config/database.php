@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'farmacia_db';
+$db['default']['username'] = 'essencia_root';
+$db['default']['password'] = 'farmacia_db_010203';
+$db['default']['database'] = 'essencia_farmacia_db';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
@@ -64,6 +64,6 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
-
+## farmacia_db_010203 << senha prod
 /* End of file database.php */
 /* Location: ./application/config/database.php */

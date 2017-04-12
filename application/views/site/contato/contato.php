@@ -1,4 +1,9 @@
 <div class="container">
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 			<div class="section">
 				
 			</div>
@@ -7,12 +12,19 @@
 			</div>
 				<div class="col s12 m12 l6">
 					<div class="card">
-						<div class="card-content light-blue lighten-1">
-							<h5 class="center white-text">CONTATO</h5>
+						<div class="card-content">
+							<h5 class="center orange-text">CONTATO</h5>
 						</div>
 						<div class="card-content">
 						<div class="row">
-							<form class="col s12 m12 l6" method="post">
+							<form class="col s12 m12 l6" method="post" enctype="multipart/form-data">
+								<div class="row">
+									<?php if(!empty(validation_errors())):?>
+										<div class="card-panel red lighten-4">
+											<?php echo validation_errors('<b><p style="color: #f44336;">','</p></b>'); ?>
+										</div>
+									<?php endif;?>
+								</div>
 								<div class="row">	
 									<div class="input-field col s12 m12 l12">
 										<input type="text" id="nome" name="nome"  value="<?php echo set_value("nome"); ?>" class="validate" required autofocus>

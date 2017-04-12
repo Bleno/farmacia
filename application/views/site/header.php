@@ -15,15 +15,31 @@
   <link href="<?php echo base_url("static/css/style.css"); ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
     <style type="text/css">
         body {
-            margin-left: 0px;
+            /* margin-left: 0px;
             margin-top: 0px;
             margin-right: 0px;
-            margin-bottom: 0px;
+            margin-bottom: 0px; */
             background-image: url('/static/site/img/bg_site.png');
             background-repeat: no-repeat;
             background-color: #e9e9e9;
-            /* background-position: center; */
+            background-position: initial;
+            background-size: contain;
         }
+    </style>
+
+    <style>
+    /*
+      CSS para o materialized
+     */
+     body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+      /* #background: #FFC1C1; */
+    }
+    main {
+     flex: 1 0 auto;
+    }
     </style>
 
     <style type="text/css">
@@ -77,33 +93,38 @@
 </head>
 <main>
 <body>
-	<div class="container" id="header-site">
-		<nav class="transparent no-shadown">
-			<img class="responsive-img" src="/static/site/logo_site.png" alt="" />
-		</nav>
-	</div>
-	<nav class="transparent no-shadown" role="navigation">
-	    <div class="nav-wrapper container">
-	    	<a id="logo-container" href="#" class="brand-logo">
-	    	</a>
-	      <ul class="right hide-on-med-and-down">
-	        <li <?php if($view == 'home'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("home"); ?>">Home</a></li>
-	        <li <?php if($view == 'produtos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("produtos"); ?>">Produtos</a></li>
-	        <li <?php if($view == 'servicos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("servicos"); ?>">Serviços</a></li>
-	        <li <?php if($view == 'orcamentos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("orcamentos"); ?>">Orçamentos</a></li>
-	        <li <?php if($view == 'dicas'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("orcamentos"); ?>">Dicas</a></li>
-	        <li <?php if($view == 'contato'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("contato"); ?>">Contato</a></li>
-	      </ul>
+<div class="container" style="height: 200px;">
+    <div class="row">
+        <div class="col s12 l3">
+        	<div class="" id="header-site">
+        		<nav class="transparent no-shadown">
+        			<img class="responsive-img" src="/static/site/logo_site.png" alt="" />
+        		</nav>
+        	</div>
+        </div>
+        <div class="col s12 l9">
+        	<nav class="transparent no-shadown" role="navigation">
+        	    <div class="nav-wrapper">
+        	      <ul class="left hide-on-med-and-down">
+        	        <li <?php if($view == 'home'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("home"); ?>">Home</a></li>
+        	        <li <?php if($view == 'produtos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("produtos/page"); ?>">Produtos</a></li>
+        	        <li <?php if($view == 'servicos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("servicos"); ?>">Serviços</a></li>
+        	        <li <?php if($view == 'orcamentos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("orcamentos"); ?>">Orçamentos</a></li>
+        	        <li <?php if($view == 'dicas'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("orcamentos"); ?>">Dicas</a></li>
+        	        <li <?php if($view == 'contato'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("contato"); ?>">Contato</a></li>
+        	      </ul>
 
-	      <ul id="nav-mobile" class="side-nav">
-	        <li <?php if($view == 'home'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("home"); ?>">Home</a></li>
-	        <li <?php if($view == 'produtos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("produtos"); ?>">Produtos</a></li>
-	        <li <?php if($view == 'servicos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("servicos"); ?>">Serviços</a></li>
-	        <li <?php if($view == 'orcamentos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("orcamentos"); ?>">Orçamentos</a></li>
-	        <li <?php if($view == 'dicas'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("orcamentos"); ?>">Dicas</a></li>
-	        <li <?php if($view == 'contato'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("contato"); ?>">Contato</a></li>
-	      </ul>
-	      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons green-text">menu</i></a>
-	    </div>
-	</nav>
-    
+        	      <ul id="nav-mobile" class="side-nav">
+        	        <li <?php if($view == 'home'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("home"); ?>">Home</a></li>
+        	        <li <?php if($view == 'produtos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("produtos/page"); ?>">Produtos</a></li>
+        	        <li <?php if($view == 'servicos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("servicos"); ?>">Serviços</a></li>
+        	        <li <?php if($view == 'orcamentos'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("orcamentos"); ?>">Orçamentos</a></li>
+        	        <li <?php if($view == 'dicas'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("orcamentos"); ?>">Dicas</a></li>
+        	        <li <?php if($view == 'contato'): ?> class="active" <?php endif; ?> ><a class="menu-site" href="<?php echo base_url("contato"); ?>">Contato</a></li>
+        	      </ul>
+        	      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons green-text">menu</i></a>
+        	    </div>
+        	</nav>
+        </div>
+    </div>
+</div>    

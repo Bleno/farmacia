@@ -33,6 +33,7 @@ class Principal extends CI_Controller {
 		
 		//redirect('Principal/categoria');
 		$this->load->view('principal', $dados);
+		//$this->load->view('site/inicio');
 
 	}
 	
